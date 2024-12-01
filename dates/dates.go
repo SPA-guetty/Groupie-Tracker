@@ -30,7 +30,9 @@ func Length(url string) int {
 	return nb
 }
 
+// Lire le corps de la réponse de l'API "date"
 func ReadDates(body []byte) {
+	// Analyser les données JSON dans une variable de type date
 	var datatab date
 	err := json.Unmarshal([]byte(body), &datatab)
 	if err != nil {
