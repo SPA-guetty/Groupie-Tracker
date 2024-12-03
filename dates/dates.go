@@ -11,8 +11,8 @@ import (
 
 // Représentation d'une date de concert
 type date struct {
-	Id    string   `json:"id"`
-	Dates []string `json:"date"`
+	Id    int      `json:"id"`
+	Dates []string `json:"dates"`
 }
 
 func Length(url string) int {
@@ -34,7 +34,7 @@ func Length(url string) int {
 func ReadDates(body []byte) {
 	// Analyser les données JSON dans une variable de type date
 	var datatab date
-	err := json.Unmarshal([]byte(body), &datatab)
+	err := json.Unmarshal(body, &datatab)
 	if err != nil {
 		log.Fatalf("Erreur lors de l'analyse du JSON: %v", err)
 	}
@@ -47,15 +47,16 @@ func ReadDates(body []byte) {
 			fmt.Println(date)
 		}
 	}
+	fmt.Println(datatab)
 }
 
 func OpenDates(id string) {
 	urlint, _ := strconv.Atoi(id)
-	if urlint < 1 || urlint > Length("https://groupietrackers.herokuapp.com/api/locations") {
+	if urlint < 1 || urlint > Length("https://groupietrackers.herokuapp.com/api/dates") {
 		fmt.Println("Error: dates index is out of range")
 		return
 	}
-	url := "https://groupietrackers.herokuapp.com/api/locations/" + id
+	url := "https://groupietrackers.herokuapp.com/api/dates/" + id
 	resp, err := http.Get(url)
 	if err != nil {
 		log.Fatalf("Erreur lors de la requête HTTP: %v", err)
