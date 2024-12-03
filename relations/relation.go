@@ -9,7 +9,7 @@ import (
 )
 
 type relation struct {
-	Id        		int      `json:"id"`
+	Id        		int      			`json:"id"`
 	DatesLocations 	map[string][]string `json:"datesLocations"`
 }
 
@@ -35,7 +35,7 @@ func ReadRelation(body []byte) {
 		fmt.Println("Error:", err2)
 		return
 	}
-	fmt.Println(artiststab.DatesLocations["colorado-usa"])
+	fmt.Println(artiststab.DatesLocations)
 }
 
 func OpenRelation(id string) {
