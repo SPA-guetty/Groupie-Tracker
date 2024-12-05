@@ -1,0 +1,34 @@
+{{ define "home" }}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="static/homestyle.css"/>    
+    <title>{{.TitleGroup}}</title>
+</head>
+<body>
+    <div class="container">
+        <h1 id="hangmangameTitle">{{.TitleGroup}}</h1>
+
+        <div class="message">
+            <p id="explication">Choisissez votre groupe préféré ou rechercher graçe aux différents filtres</p>
+        </div>
+    
+        <!-- Formulaire de supposition -->
+        <form action="/" method="POST" class="form-container">
+            <label for=""></label>
+            <input type="text" name="" id="" required autofocus />
+            <input type="submit" value="Soumettre" />
+        </form>
+        
+    </div>
+    <div class="artist">
+        <img src="{{.artist}}" alt="Image de l'artiste à chercher" style="max-width: 100px; max-height: 100px;"/>
+    </div>
+    <a href="/">
+        <button id="returnHome">Retour à la page d'accueil</button>
+    </a>
+</body>
+</html>
+{{ end }}
