@@ -19,7 +19,7 @@ type artist struct {
 	Relations string `json:"relations"`
 }
 
-func GetArtists() {
+func GetArtists() []artist {
 	url := "https://groupietrackers.herokuapp.com/api/artists"
 	req, _ := http.NewRequest("GET", url, nil)
 	res, _ := http.DefaultClient.Do(req)
@@ -29,9 +29,10 @@ func GetArtists() {
 	err := json.Unmarshal([]byte(body), &tab)
 	if err != nil {
 		fmt.Println("Error:", err)
-		return
+		return nil
 	}
 	for _, e := range tab {
 		fmt.Println(e.Name)
 	}
+	return tab
 }
