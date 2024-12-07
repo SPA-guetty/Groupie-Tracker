@@ -1,0 +1,61 @@
+body {
+    display: flex;
+    justify-content: center;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f80850;
+}
+
+.container {
+    width: 80%;
+    margin: 0 auto;
+    padding: 10px;
+    border: solid black 3px;
+    border-radius: 20px;
+}
+
+#groupTitlePage {
+
+    text-align: center;
+    color: #333;
+}
+
+.artist-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.artist {
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 20px;
+    width: 30%;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.artist img {
+    border-radius: 5px;
+    max-width: 200px;
+    max-height: 200px;
+    object-fit: cover;
+    margin-bottom: 10px;
+    border: black solid 2px;
+}
+
+#returnHome {
+    display: block;
+    margin: 20px auto;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#returnHome:hover {
+    background-color: #0056b3;
+}
