@@ -1,48 +1,63 @@
 {{ define "home" }}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="static/homestyle.css"/>    
+    <link rel="stylesheet" type="text/css" href="static/homestyle.css"/>
     <title>{{.TitleGroup}}</title>
 </head>
+
 <body>
     <div class="container">
         <h1 id="groupTitlePage">{{.TitleGroup}}</h1>
 
         <div class="message">
-            <p id="explication">Choisissez votre groupe préféré ou rechercher graçe aux différents filtres</p>
+            <p id="explication">Choisissez votre groupe préféré ou recherchez grâce aux différents filtres</p>
         </div>
     
         <h2>Filtres</h2>
-    
-    <form action=".go" method="GET">
-        <!-- Champ de sélection pour les catégories -->
-        <label for="categorie">Catégorie:</label>
-        <select id="categorie" name="categorie">
-            <option value="normalSens">A-Z</option>
-            <option value="reverseSens">Z-A</option>
-            <option value="date"></option>
-            <option value=""></option>
-        </select><br><br>
-        
-        <!-- Champ de sélection pour les dates -->
-        <label for="date">Date:</label>
-        <input type="date" id="date" name="date"><br><br>
+        <form action=".go" method="GET">
+            <!-- Champ de sélection pour les catégories -->
+            <label for="categorie">Catégorie:</label>
+            <select id="categorie" name="categorie">
+                <option value="normalSens">A-Z</option>
+                <option value="reverseSens">Z-A</option>
+                <option value="date">Date</option>
+                <option value=""></option>
+            </select><br><br>
 
-        <!-- Case à cocher pour inclure ou non les filtres supplémentaires -->
-        <label for="extra_filters">Activer les filtres supplémentaires:</label>
-        <input type="checkbox" id="extra_filters" name="extra_filters" value="oui"><br><br>
+            <!-- Champ de sélection pour les dates -->
+            <label for="date">Date:</label>
+            <input type="date" id="date" name="date"><br><br>
+
+            <!-- Case à cocher pour activer des filtres supplémentaires -->
+            <label for="extra_filters">Activer les filtres supplémentaires:</label>
+            <input type="checkbox" id="extra_filters" name="extra_filters" value="oui"><br><br>
+
+            <!-- Bouton d'envoi -->
+            <input type="submit" value="Envoyer">
+        </form>
         
-        <!-- Bouton d'envoi -->
-        <input type="submit" value="Envoyer">
-    </form>
-        
+        <h2>Artistes</h2>
+        <div class="artist-list">
+            <!-- Afficher les artistes récupérés depuis le back-end -->
+            {{range .Artists}}
+                <div class="artist">
+                    <h3>{{.Name}}</h3>
+                    <img src="{{.Image}}" alt="Image de {{.Name}}" style="max-width: 200px; max-height: 200px;"/>
+                    <p>Année de création: {{.CreationDate}}</p>
+                    <p>Premier album: {{.FirstAlbum}}</p>
+                    <p>Membres: {{range .Members}} {{.}} {{end}}</p>
+                    <p>Lieu de concert: {{.Locations}}</p>
+                    <p>Dates de concert: {{.ConcertDates}}</p>
+                </div>
+            {{else}}
+                <p>Aucun artiste trouvé.</p>
+            {{end}}
+        </div>
     </div>
-    <div class="artist">
-        <img src="{{.artist}}" alt="Image de l'artiste à chercher" style="max-width: 100px; max-height: 100px;"/>
-    </div>
+
     <a href="/">
         <button id="returnHome">Retour à la page d'accueil</button>
     </a>
