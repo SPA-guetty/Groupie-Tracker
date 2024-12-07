@@ -1,43 +1,54 @@
 package main
 
 import (
-	"encoding/json"
+	"fmt"
 	"groupie_tracker/autors"
+	"html/template"
 	"log"
 	"net/http"
-	"fmt"
 )
 
+type PageData struct {
+	TitleGroup string
+	Artists    []autors.Artist
+}
+
+var port = ":8080"
+
 func main() {
-	log.Println("Listening on :8080...")
+	// Routes du serveur
 	http.HandleFunc("/", ArtHandler)
-	err := http.ListenAndServe(":8080", nil)
-	if err != nil {
-		log.Fatal(err)
-	}
+
+	// Serveur de fichiers statiques pour les images et fichiers css
+	fileServer := http.FileServer(http.Dir("./assets"))
+	http.Handle("/static/", http.StripPrefix("/static/", fileServer))
+
+	fmt.Println("Server started on port", port)
+	log.Fatal(http.ListenAndServe(port, nil))
 }
 
 func ArtHandler(w http.ResponseWriter, req *http.Request) {
-	tab := autors.GetArtists()
+	// Récupérer les données des artistes
+	artists, err := autors.GetArtists()
+	if err != nil {
+		log.Fatalf("Erreur lors de la récupération des artistes: %v", err)
+	}
 
-	fmt.Println("tab:",tab)
-	
-	w.Header().Set("Content-Type", "application/json")
+	// Préparer les données pour le template
+	pageData := PageData{
+		TitleGroup: "Groupie Trackers",
+		Artists:    artists,
+	}
 
-	// Convertir la structure Go en JSON et l'envoyer en réponse
-	if err := json.NewEncoder(w).Encode(tab); err != nil {
-		http.Error(w, fmt.Sprintf("Erreur lors de l'envoi de la réponse: %v", err), http.StatusInternalServerError)
+	// Charger et exécuter le template HTML
+	tmpl, err := template.New("home").ParseFiles("templates/home.html")
+	if err != nil {
+		http.Error(w, fmt.Sprintf("Erreur lors du chargement du template: %v", err), http.StatusInternalServerError)
+		return
+	}
+
+	err = tmpl.Execute(w, pageData)
+	if err != nil {
+		http.Error(w, fmt.Sprintf("Erreur lors de l'exécution du template: %v", err), http.StatusInternalServerError)
 	}
 }
-
-/*
-{"id":52,
-"image":"https://groupietrackers.herokuapp.com/api/images/thechainsmokers.jpeg",
-"name":"The Chainsmokers",
-"members":["Alexander Pall","Andrew Taggart","Matt McGuire","Tony Ann"],
-"creationDate":2008,
-"firstAlbum":"15-03-2014",
-"locations":"https://groupietrackers.herokuapp.com/api/locations/52",
-"concertDates":"https://groupietrackers.herokuapp.com/api/dates/52",
-"relations":"https://groupietrackers.herokuapp.com/api/relation/52"}
-*/
