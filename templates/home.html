@@ -14,28 +14,42 @@
         <h1 id="groupTitlePage">{{.TitleGroup}}</h1>
 
         <div class="message">
-            <p id="explication">Choisissez votre groupe préféré ou recherchez grâce aux différents filtres</p>
+            <p id="explication">**Choisissez votre groupe préféré ou recherchez grâce aux différents filtres**</p>
         </div>
     
         <h2 id="filters">Filtres</h2>
-        <form action=".go" method="GET">
+        <form class="form-filterHome" action=".go" method="GET">
             <!-- Champ de sélection pour les catégories -->
-            <label for="categorie">Catégorie:</label>
-            <select id="categorie" name="categorie">
-                <option value="normalSens">A-Z</option>
-                <option value="reverseSens">Z-A</option>
-                <option value="date">Date</option>
-                <option value=""></option>
-            </select><br><br>
+            <fieldset id="read-section">
+                <legend>Ordre Alphabétique</legend>
+                <label for="categorie">Ordre de lecture :</label>
+                <select id="categorie" name="categorie">
+                    <option value="normalSens">A-Z</option>
+                    <option value="reverseSens">Z-A</option>
+                </select><br><br>
+            </fieldset>
 
             <!-- Champ de sélection pour les dates -->
-            <label for="date">Date:</label>
-            <input type="date" id="date" name="date"><br><br>
-
-            <!-- Case à cocher pour activer des filtres supplémentaires -->
-            <label for="extra_filters">Activer les filtres supplémentaires:</label>
-            <input type="checkbox" id="extra_filters" name="extra_filters" value="oui"><br><br>
-
+            <fieldset id="concert-section">
+                <legend>Filtre par Date de Concert</legend>
+                <label for="concert-date">Entrez la date d'un concert :</label>
+                <input type="date" name="concert-date" id="concert-date"><br><br>
+            </fieldset>
+            
+            <!-- Case à cocher pour activer des filtres par date -->
+            <fieldset id="creation-section">
+                <legend>Filtres par Dates de création du groupe</legend>
+                <label for="before-1980">Avant 1980 inclus</label>
+                <input type="checkbox" name="before-1980" id="before-1980"><br>
+                <label for="1980-1990">Entre 1980 et 1990 inclus</label>
+                <input type="checkbox" name="1980-1990" id="1980-1990"><br>
+                <label for="1990-2000">Entre 1990 et 2000 inclus</label>
+                <input type="checkbox" name="1990-2000" id="1990-2000"><br>
+                <label for="2000-2010">Entre 2000 et 2010 inclus</label>
+                <input type="checkbox" name="2000-2010" id="2000-2010"><br>
+                <label for="after 2010">Après 2010</label>
+                <input type="checkbox" name="after 2010" id="after 2010"><br>
+            </fieldset>
             <!-- Bouton d'envoi -->
             <input type="submit" value="Envoyer">
         </form>
