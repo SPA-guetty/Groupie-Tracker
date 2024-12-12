@@ -32,13 +32,46 @@ body {
 
 #filters {
     font-size: 29px;
-    margin: 20px 0 0 28px;
+    margin: 10px 0px 0px 28px;
 }
 
 .form-filterHome {
     font-size: 16.5px;
     margin: 20px 0 20px 50px;
     font-weight: 470;
+}
+
+#read-section {
+    background-color: rgba(170, 200, 40, 0.4);
+    padding-left: 10px;
+    margin: -20px 40px 10px 0px;
+    border-radius: 7px;
+}
+
+#read-section > label {
+    padding-left: 20px;
+}
+
+#concert-section {
+    background-color: rgba(123, 136, 209, 0.4);
+    padding-left: 10px;
+    margin: 10px 40px 10px 0px;
+    border-radius: 7px;
+}
+
+#concert-section > label {
+    padding-left: 20px;
+}
+
+#creation-section {
+    background-color: rgba(236, 142, 189, 0.4);
+    padding: 5px 0 5px 10px;
+    margin: 10px 40px 10px 0px;
+    border-radius: 7px;
+}
+
+#creation-section > label {
+    padding-left: 20px;
 }
 
 #categorie {
@@ -50,6 +83,85 @@ body {
 
 #categorie:hover {
     box-shadow: 2px 2px 7px 5px #474747;
+}
+
+#concert-date {
+    height: 30px;
+    width: 120px;
+    text-align: center;
+    font-weight: 600;
+}
+
+#concert-date:hover {
+    box-shadow: 2px 2px 7px 5px #474747;
+}
+
+#before-1980 {
+    height: 14px;
+    width: 14px;
+    margin-left: 60px;
+}
+
+#before-1980:hover {
+    box-shadow: 2px 2px 7px 5px #474747;
+}
+
+#date_1980-1990 {
+    height: 14px;
+    width: 14px;
+    margin-left: 5.2px;
+}
+
+#date_1980-1990:hover {
+    box-shadow: 2px 2px 7px 5px #474747;
+}
+
+#date_1990-2000 {
+    height: 14px;
+    width: 14px;
+    margin-left: 1.22px;
+}
+
+#date_1990-2000:hover {
+    box-shadow: 2px 2px 7px 5px #474747;
+}
+
+#date_2000-2010 {
+    height: 14px;
+    width: 14px;
+    margin-left: 2.16px;
+}
+
+#date_2000-2010:hover {
+    box-shadow: 2px 2px 7px 5px #474747;
+}
+
+#after-2010 {
+    height: 14px;
+    width: 14px;
+    margin-left: 115.1px;
+}
+
+#after-2010:hover {
+    box-shadow: 2px 2px 7px 5px #474747;
+}
+
+.submit-filter {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+#button-submit-filter {
+    height: 37px;
+    width: 83px;
+    background-color: #4f78e9;
+    border-radius: 7px;
+    border: #4f78e9 double 3px;
+}
+
+#button-submit-filter:hover {
+    background-color: #5d85f5;
 }
 
 .card-container {
