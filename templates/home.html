@@ -10,13 +10,14 @@
 
 <body>
     <div class="container">
+
         <h1 id="groupTitlePage">{{.TitleGroup}}</h1>
 
         <div class="message">
             <p id="explication">Choisissez votre groupe préféré ou recherchez grâce aux différents filtres</p>
         </div>
     
-        <h2>Filtres</h2>
+        <h2 id="filters">Filtres</h2>
         <form action=".go" method="GET">
             <!-- Champ de sélection pour les catégories -->
             <label for="categorie">Catégorie:</label>
@@ -38,14 +39,77 @@
             <!-- Bouton d'envoi -->
             <input type="submit" value="Envoyer">
         </form>
+
+        <div class="card-container">
+            <div class="artist-list">
+                {{range .Artists}}
+                    <div class="card">
+                        <div class="image-content">
+                            <span class="overlay"></span>
+                        
+                            <div id="artist-image">
+                                <img id="artist-img" src="{{.Image}}" alt="Image de {{.Name}}"/>
+                            </div>
+                        </div>
+
+                        <div class="card-content">
+                            <h2 id="artistName">{{.Name}}</h2>
+                            <p id="dateOfCreat">Année de création: {{.CreationDate}}</p>
+                            <p id="firstAlbum">Premier album: {{.FirstAlbum}}</p>
+                            <h2 id="members">Membres :</h2>
+                            <ul>
+                                {{range .Members}}
+                                    <li>{{.}}</li>
+                                {{end}}
+                            </ul> 
+                            <p id="concert-location">Lieu de concert: {{.Locations}}</p>
+                            <p id="concert-dates">Dates de concert: {{.ConcertDates}}</p>
+                            <button class="button">View More</button>
+                        </div>
+                    </div>
+                    
+                {{else}}
+                    <p>Aucun artiste trouvé.</p>
+                {{end}}
+            </div>
+        </div>
+    
+        <!--<h1 id="groupTitlePage">{{.TitleGroup}}</h1>
+
+        <div class="message">
+            <p id="explication">Choisissez votre groupe préféré ou recherchez grâce aux différents filtres</p>
+        </div>
+    
+        <h2>Filtres</h2>
+        <form action=".go" method="GET">-->
+            <!-- Champ de sélection pour les catégories -->
+            <!--<label for="categorie">Catégorie:</label>
+            <select id="categorie" name="categorie">
+                <option value="normalSens">A-Z</option>
+                <option value="reverseSens">Z-A</option>
+                <option value="date">Date</option>
+                <option value=""></option>
+            </select><br><br>-->
+
+            
+            <!--<label for="date">Date:</label>
+            <input type="date" id="date" name="date"><br><br>
+
+            
+            <label for="extra_filters">Activer les filtres supplémentaires:</label>
+            <input type="checkbox" id="extra_filters" name="extra_filters" value="oui"><br><br>
+
+            
+            <input type="submit" value="Envoyer">
+        </form>
         
         <h2>Artistes</h2>
-        <div class="artist-list">
+        <div class="artist-list">-->
             <!-- Afficher les artistes récupérés depuis le back-end -->
-            {{range .Artists}}
+            <!--{{range .Artists}}
                 <div class="artist">
-                    <h3>{{.Name}}</h3>
                     <img src="{{.Image}}" alt="Image de {{.Name}}" style="max-width: 200px; max-height: 200px;"/>
+                    <h3 id="nameArtist">{{.Name}}</h3>
                     <p>Année de création: {{.CreationDate}}</p>
                     <p>Premier album: {{.FirstAlbum}}</p>
                     <p>Membres: {{range .Members}} {{.}} {{end}}</p>
@@ -54,13 +118,9 @@
                 </div>
             {{else}}
                 <p>Aucun artiste trouvé.</p>
-            {{end}}
-        </div>
+            {{end}}-->
     </div>
 
-    <a href="/">
-        <button id="returnHome">Retour à la page d'accueil</button>
-    </a>
 </body>
 </html>
 {{ end }}
