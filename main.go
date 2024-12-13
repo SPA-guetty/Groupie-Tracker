@@ -33,8 +33,12 @@ func ArtHandler(w http.ResponseWriter, req *http.Request) {
 	if err != nil {
 		log.Fatalf("Erreur lors de la récupération des artistes: %v", err)
 	}
+	artists = autors.Filter_By_Name_Reversed(artists)
+	for _, e := range artists {
+		fmt.Println(e.Name)
+	}
 
-	// Préparer les données pour le template
+	// Données pour le template
 	pageData := PageData{
 		TitleGroup: "Groupie Trackers",
 		Artists:    artists,
