@@ -38,7 +38,7 @@ func ArtHandler(w http.ResponseWriter, req *http.Request) {
 		fmt.Println(e.Name)
 	}
 
-	// Préparer les données pour le template
+	// Données pour le template
 	pageData := PageData{
 		TitleGroup: "Groupie Trackers",
 		Artists:    artists,
