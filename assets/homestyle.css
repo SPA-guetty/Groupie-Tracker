@@ -153,6 +153,7 @@ body {
 }
 
 #button-submit-filter {
+    font-size: 16px;
     height: 37px;
     width: 83px;
     background-color: #4f78e9;
