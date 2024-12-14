@@ -36,7 +36,7 @@ func ArtHandler(w http.ResponseWriter, req *http.Request) {
 
 	artists = autors.Filter_By_Creation(artists)
 
-	// Préparer les données pour le template
+	// Données pour le template
 	pageData := PageData{
 		TitleGroup: "Groupie Trackers",
 		Artists:    artists,
