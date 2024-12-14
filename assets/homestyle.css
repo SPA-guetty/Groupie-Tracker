@@ -35,7 +35,7 @@ body {
     margin: 10px 0px 0px 28px;
 }
 
-.form-filterHome {
+.form-filterHome-alphabet, .form-filterHome-concert, .form-filterHome-creation {
     font-size: 16.5px;
     margin: 20px 0 20px 50px;
     font-weight: 470;
@@ -96,6 +96,41 @@ body {
     box-shadow: 2px 2px 7px 5px #474747;
 }
 
+#research-startDate {
+    height: 30px;
+    width: 120px;
+    text-align: center;
+    font-weight: 600;
+}
+
+#research-startDate {
+    box-shadow: 2px 2px 7px 5px #474747;
+}
+
+#research-endDate {
+    height: 30px;
+    width: 120px;
+    text-align: center;
+    font-weight: 600;
+}
+
+#research-endDate {
+    box-shadow: 2px 2px 7px 5px #474747;
+}
+
+#button-submit-dates {
+    font-size: 16px;
+    height: 37px;
+    width: 83px;
+    background-color: #4f78e9;
+    border-radius: 7px;
+    border: #4f78e9 double 3px;
+}
+
+#button-submit-dates:hover {
+    background-color: #7999f0;
+}
+
 #before-1980 {
     height: 14px;
     width: 14px;
@@ -150,19 +185,29 @@ body {
     display: flex;
     flex-direction: row;
     justify-content: center;
+    padding: 10px 0;
 }
 
-#button-submit-filter {
+#button-submit-filter-alphabet, #button-submit-filter-concert, #button-submit-filter-dates, #button-submit-filter-creation {
     font-size: 16px;
-    height: 37px;
+    height: 32px;
     width: 83px;
+    padding-bottom: 15px;
     background-color: #4f78e9;
     border-radius: 7px;
     border: #4f78e9 double 3px;
 }
 
-#button-submit-filter:hover {
+#button-submit-filter-alphabet:hover, #button-submit-filter-concert:hover, #button-submit-filter-dates:hover, #button-submit-filter-creation:hover {
     background-color: #5d85f5;
+    transform: scale(1.1);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+}
+
+#button-submit-filter-alphabet:active, #button-submit-filter-concert:active, #button-submit-filter-dates:active, #button-submit-filter-creation:active {
+    background-color: #5d85f5;
+    transform: scale(0.9);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
 
 .card-container {
