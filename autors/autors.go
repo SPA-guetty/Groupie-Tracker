@@ -58,10 +58,10 @@ func GetArtists() ([]Artist, error) {
 		return nil, err
 	}
 
-	// Affichage des noms des artistes pour le débogage (facultatif)
+	/*
 	for _, e := range artists {
 		fmt.Println("Artiste:", e.Name)
-	}
+	}*/
 
 	return artists, nil
 }
