@@ -33,9 +33,13 @@ func ArtHandler(w http.ResponseWriter, req *http.Request) {
 	if err != nil {
 		log.Fatalf("Erreur lors de la récupération des artistes: %v", err)
 	}
-	artists = autors.Filter_By_Name_Reversed(artists)
-	for _, e := range artists {
-		fmt.Println(e.Name)
+
+	// Vérifier le paramètre de tri
+	categorie := req.URL.Query().Get("categorie")
+	if categorie == "reverseSens" {
+		artists = autors.Filter_By_Name_Reversed(artists)
+	} else {
+		artists = autors.Filter_By_Name(artists)
 	}
 
 	// Données pour le template
