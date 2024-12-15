@@ -74,31 +74,37 @@
         <div class="card-container">
             <div class="artist-list">
                 {{range .Artists}}
-                    <div class="card">
-                        <div class="image-content">
-                            <span class="overlay"></span>
-                        
-                            <div id="artist-image">
-                                <img id="artist-img" src="{{.Image}}" alt="Image de {{.Name}}"/>
+                    <div class="card" id="card">
+                        <div class="card-front">Face-avant
+                            <div class="image-content">
+                                <span class="overlay"></span>
+                            
+                                <div id="artist-image">
+                                    <img id="artist-img" src="{{.Image}}" alt="Image de {{.Name}}"/>
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="card-content">
-                            <h2 id="artistName">{{.Name}}</h2>
-                            <p id="dateOfCreat">Année de création: {{.CreationDate}}</p>
-                            <p id="firstAlbum">Premier album: {{.FirstAlbum}}</p>
-                            <h2 id="members">Membres :</h2>
-                            <ul>
-                                {{range .Members}}
-                                    <li>{{.}}</li>
-                                {{end}}
-                            </ul> 
-                            <p id="concert-location">Lieu de concert: {{.Locations}}</p>
-                            <p id="concert-dates">Dates de concert: {{.ConcertDates}}</p>
-                            <button class="button">View More</button>
+                            <div class="card-content">
+                                <h2 id="artistName">{{.Name}}</h2>
+                            </div>
+                            <button class="flip-button" onclick="document.querySelector('.card').classList.add('flipped')">View more</button>
+                        </div>
+                        <div class="card-back">Face-arrière
+                            <div class="card-content">
+                                <p id="dateOfCreat">Année de création: {{.CreationDate}}</p>
+                                <p id="firstAlbum">Premier album: {{.FirstAlbum}}</p>
+                                <h2 id="members">Membres :</h2>
+                                <ul>
+                                    {{range .Members}}
+                                        <li>{{.}}</li>
+                                    {{end}}
+                                </ul> 
+                                <p id="concert-location">Lieu de concert: {{.Locations}}</p>
+                                <p id="concert-dates">Dates de concert: {{.ConcertDates}}</p>
+                            </div>
+                            <button class="flip-button" onclick="document.querySelector('.card').classList.remove('flipped')">Return</button>
                         </div>
                     </div>
-                    
                 {{else}}
                     <p>Aucun artiste trouvé.</p>
                 {{end}}
@@ -151,7 +157,6 @@
                 <p>Aucun artiste trouvé.</p>
             {{end}}-->
     </div>
-
 </body>
 </html>
 {{ end }}
