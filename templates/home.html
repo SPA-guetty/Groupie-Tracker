@@ -87,7 +87,8 @@
                             <div class="card-content">
                                 <h2 id="artistName">{{.Name}}</h2>
                             </div>
-                            <button class="flip-button" onclick="document.querySelector('.card').classList.add('flipped')">View more</button>
+                            <button class="flip-button" onclick="flipCard(this)">View more</button>
+                            <!--<button class="flip-button" onclick="document.querySelector('.card').classList.add('flipped')">View more</button>-->
                         </div>
                         <div class="card-back">Face-arrière
                             <div class="card-content">
@@ -102,7 +103,8 @@
                                 <p id="concert-location">Lieu de concert: {{.Locations}}</p>
                                 <p id="concert-dates">Dates de concert: {{.ConcertDates}}</p>
                             </div>
-                            <button class="flip-button" onclick="document.querySelector('.card').classList.remove('flipped')">Return</button>
+                            <button class="flip-button" onclick="flipCard(this)">Return</button>
+                            <!--<button class="flip-button" onclick="document.querySelector('.card').classList.remove('flipped')">Return</button>-->
                         </div>
                     </div>
                 {{else}}
@@ -157,6 +159,13 @@
                 <p>Aucun artiste trouvé.</p>
             {{end}}-->
     </div>
+
+    <script>
+        function flipCard(button) {
+            var card = button.closest('.card');
+            card.classList.toggle('flipped');
+        }
+    </script>
 </body>
 </html>
 {{ end }}
