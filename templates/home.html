@@ -41,12 +41,16 @@
                 <div class="submit-filter">
                     <input id="button-submit-filter-dates" type="submit" value="Obtenir">
                 </div>
-                <label for="research-startDate">Date de début :</label>
-                <input type="date" name="research-startDate" id="research-startDate" required><br>
-                <label for="research-endDate">Date de fin :</label> 
-                <input type="date" name="research-endDate" id="research-endDate" required><br>
+                <table id="table-choiceBetweenTwoDates">
+                    <tr>
+                        <td><label class="label-searchDate" for="research-startDate">Date de début :</label>
+                        <input type="date" name="research-startDate" id="research-startDate" required></td><br><br>
+                        <td id="td-2-DateResearch"><label class="label-searchDate" for="research-endDate">Date de fin :</label>
+                        <input type="date" name="research-endDate" id="research-endDate" required><br></td>
+                    </tr>    
+                </table>    
                 <div class="submit-filter">
-                    <input id="button-submit-filter-dates" type="submit" value="Obtenir les dates">
+                    <input id="button-submit-filter-dates" type="submit" value="Obtenir">
                 </div>
             </fieldset>
         </form>
@@ -75,7 +79,7 @@
             <div class="artist-list">
                 {{range .Artists}}
                     <div class="card" id="card">
-                        <div class="card-front">Face-avant
+                        <div class="card-front">
                             <div class="image-content">
                                 <span class="overlay"></span>
                             
@@ -90,7 +94,7 @@
                             <button class="flip-button" onclick="flipCard(this)">View more</button>
                             <!--<button class="flip-button" onclick="document.querySelector('.card').classList.add('flipped')">View more</button>-->
                         </div>
-                        <div class="card-back">Face-arrière
+                        <div class="card-back">
                             <div class="card-content">
                                 <p id="dateOfCreat">Année de création: {{.CreationDate}}</p>
                                 <p id="firstAlbum">Premier album: {{.FirstAlbum}}</p>

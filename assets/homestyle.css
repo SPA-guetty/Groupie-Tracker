@@ -75,6 +75,7 @@ body {
 }
 
 #categorie {
+    border-radius: 7px;
     height: 30px;
     width: 70px;
     text-align: center;
@@ -86,8 +87,9 @@ body {
 }
 
 #concert-date {
+    border-radius: 7px;
     height: 30px;
-    width: 120px;
+    width: 145px;
     text-align: center;
     font-weight: 600;
 }
@@ -96,9 +98,14 @@ body {
     box-shadow: 2px 2px 7px 5px #474747;
 }
 
+#table-choiceBetweenTwoDates {
+    margin: -30px 0px 15px 20px;
+}
+
 #research-startDate {
+    border-radius: 7px;
     height: 30px;
-    width: 120px;
+    width: 145px;
     text-align: center;
     font-weight: 600;
 }
@@ -108,14 +115,17 @@ body {
 }
 
 #research-endDate {
+    border-radius: 7px;
     height: 30px;
-    width: 120px;
+    width: 145px;
     text-align: center;
     font-weight: 600;
+    box-shadow: 2px 2px 7px 5px #474747;
 }
 
-#research-endDate {
-    box-shadow: 2px 2px 7px 5px #474747;
+#label-searchDate {
+    display: inline-block;
+    margin-right: 10px;
 }
 
 #button-submit-dates {
@@ -234,24 +244,25 @@ body {
     height: 500px;
     border-radius: 25px;
     background-color: #fff;
-    perspective: 1000px;
+    /*perspective: 1000px;*/
     transform-style: preserve-3d;
-    transition: transform 0.6s;   
+    transition: transform 0.6s;
 }
 
 .card-front {
-    background-color: #29b486;
+    border-radius: 25px;
+    background-color: #fff;
 }
 
 .card-back {
-    background-color: #dce46e;
+    border-radius: 25px;
+    background-color: #fff;
     transform: rotateY(180deg);
 }
 
 .card-front, .card-back {
     position: absolute;
     top: 0;
-    left: 0;
     width: 100%;
     height: 100%;
     backface-visibility: hidden;
@@ -263,23 +274,26 @@ body {
 
 .flip-button {
     position: absolute;
-    top: 50%;
-    left: 50%;
-    bottom: 0px;
-    border: none;
+    width: 120px;
+    bottom: 5px;
+    left: 28%;
+    align-items: center;
+    border: #265df2 double 4px;
     border-radius: 10px;
     font-size: 16px;
     color: #fff;
-    padding: 6px 11px;
     background-color: #4070f4;
-    margin: 14px;
     cursor: pointer;
     transition: all 0.3s ease;
-    transform: translate(-50%, -50%);
 }
 
 .flip-button:hover {
     background: #265df2;
+}
+
+.flip-button:active {
+    transform:scale(0.9);
+    background: #4070f4;
 }
 
 /*#card:target {
@@ -345,12 +359,12 @@ body {
     border: 4px solid #4070f4;
 }
 
-/*.artist-list {
+.artist-list {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-evenly;
     gap: 20px;
-}*/
+}
 
 /*.artist {
     background-color: #fff;
