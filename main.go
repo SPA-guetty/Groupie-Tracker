@@ -42,6 +42,8 @@ func ArtHandler(w http.ResponseWriter, req *http.Request) {
 		artists = autors.Filter_By_Name(artists)
 	}
 
+	artists = autors.Get_Between_Dates("*01-05-2020", "*05-06-2022", artists)
+
 	// Données pour le template
 	pageData := PageData{
 		TitleGroup: "Groupie Trackers",
