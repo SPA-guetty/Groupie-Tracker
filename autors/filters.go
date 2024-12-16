@@ -1,7 +1,7 @@
 package autors
 
 import (
-	"groupietracker/concertdates"
+	"groupie_tracker/concertdates"
 	"strconv"
 )
 
