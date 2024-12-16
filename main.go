@@ -34,7 +34,7 @@ func ArtHandler(w http.ResponseWriter, req *http.Request) {
 		log.Fatalf("Erreur lors de la récupération des artistes: %v", err)
 	}
 
-	artists = autors.Filter_By_Creation(artists)
+	artists = autors.Get_Between_Dates("*01-05-2020", "*05-06-2022", artists)
 
 	// Données pour le template
 	pageData := PageData{
