@@ -35,20 +35,18 @@ func ArtHandler(w http.ResponseWriter, req *http.Request) {
 	}
 
 	// Vérifier le paramètre de tri
-	/*categorie := req.URL.Query().Get("categorie")
+	categorie := req.URL.Query().Get("categorie")
 	if categorie == "reverseSens" {
 		artists = autors.Filter_By_Name_Reversed(artists)
 	} else {
 		artists = autors.Filter_By_Name(artists)
-	}*/
+	}
 
 	// Données pour le template
 	pageData := PageData{
 		TitleGroup: "Groupie Trackers",
 		Artists:    artists,
 	}
-
-	fmt.Println(pageData)
 
 	// Charger et exécuter le template HTML
 	tmpl, err := template.New("home").ParseFiles("templates/home.html")

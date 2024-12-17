@@ -241,7 +241,7 @@ body {
 .card {
     position: relative;
     width: 250px;
-    height: 500px;
+    height: 300px;
     border-radius: 25px;
     background-color: #fff;
     /*perspective: 1000px;*/
