@@ -122,6 +122,14 @@ body {
     font-weight: 600;
 }
 
+#categorie2 {
+    border-radius: 7px;
+    height: 30px;
+    width: 120px;
+    text-align: center;
+    font-weight: 600;
+}
+
 #categorie:hover {
     box-shadow: 2px 2px 7px 5px #474747;
 }
