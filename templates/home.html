@@ -9,79 +9,83 @@
 </head>
 
 <body>
-    <div class="container">
+    <main class="container">
+        <header>
 
-        <h1 id="groupTitlePage">{{.TitleGroup}}</h1>
+            <h1 id="groupTitlePage">{{.TitleGroup}}</h1>
 
-        <div class="message">
-            <p id="explication">**Choisissez votre groupe préféré ou recherchez grâce aux différents filtres**</p>
-        </div>
+            <div class="message">
+                <p id="explication">**Choisissez votre groupe préféré ou recherchez grâce aux différents filtres**</p>
+            </div>
+        
+            <section id="filter">
+                <h2 id="filters">Filtres</h2>
+                <form class="form-filterHome-alphabet" action="/" method="GET">
+                    <!-- Champ de sélection pour les catégories -->
+                    <fieldset id="read-section">
+                        <legend>Ordre Alphabétique</legend>
+                        <label for="categorie">Ordre de lecture :</label>
+                        <select id="categorie" name="categorie">
+                            <option value="normalSens">A-Z</option>
+                            <option value="reverseSens">Z-A</option>
+                        </select><br><br>
+                        <div class="submit-filter">
+                            <input id="button-submit-filter-alphabet" type="submit" value="Envoyer">
+                        </div>
+                    </fieldset>
+                </form>
+                <form class="form-filterHome-concert" action="/" method="GET">
+                    <!-- Champ de sélection pour les dates -->
+                    <fieldset id="concert-section">
+                        <legend>Filtre par Date de Concert</legend>
+                        <label for="concert-date">Entrez la date d'un concert :</label>
+                        <input type="date" name="concert-date" id="concert-date"><br>
+                        <div class="submit-filter">
+                            <input id="button-submit-filter-dates" type="submit" value="Obtenir">
+                        </div><br><br>
+                        <table id="table-choiceBetweenTwoDates">
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <label class="label-searchDate" for="research-startDate">Date de début :</label>
+                                        <input type="date" name="research-startDate" id="research-startDate" required>
+                                    </td>
+                                    <td id="td-2-DateResearch">
+                                        <label class="label-searchDate" for="research-endDate">Date de fin :</label>
+                                        <input type="date" name="research-endDate" id="research-endDate" required><br>
+                                    </td>
+                                </tr>
+                            </tbody>    
+                        </table>    
+                        <div class="submit-filter">
+                            <input id="button-submit-filter-dates" type="submit" value="Obtenir">
+                        </div>
+                    </fieldset>
+                </form>
+                    
+                    <!-- Case à cocher pour activer des filtres par date -->
+                <form class="form-filterHome-creation" action="/" method="GET">
+                    <fieldset id="creation-section">
+                        <legend>Filtres par Dates de création du groupe</legend>
+                        <label for="before-1980">Avant 1980 inclus</label>
+                        <input type="checkbox" name="before-1980" id="before-1980"><br>
+                        <label for="1980-1990">Entre 1980 et 1990 inclus</label>
+                        <input type="checkbox" name="1980-1990" id="date_1980-1990"><br>
+                        <label for="1990-2000">Entre 1990 et 2000 inclus</label>
+                        <input type="checkbox" name="1990-2000" id="date_1990-2000"><br>
+                        <label for="2000-2010">Entre 2000 et 2010 inclus</label>
+                        <input type="checkbox" name="2000-2010" id="date_2000-2010"><br>
+                        <label for="after 2010">Après 2010</label>
+                        <input type="checkbox" name="after 2010" id="after-2010"><br>
+                        <div class="submit-filter">
+                            <input id="button-submit-filter-creation" type="submit" value="Obtenir">
+                        </div>
+                    </fieldset>
+                </form>
+            </section>
+        </header>
     
-        <h2 id="filters">Filtres</h2>
-        <form class="form-filterHome-alphabet" action="/" method="GET">
-            <!-- Champ de sélection pour les catégories -->
-            <fieldset id="read-section">
-                <legend>Ordre Alphabétique</legend>
-                <label for="categorie">Ordre de lecture :</label>
-                <select id="categorie" name="categorie">
-                    <option value="normalSens">A-Z</option>
-                    <option value="reverseSens">Z-A</option>
-                </select><br><br>
-                <div class="submit-filter">
-                    <input id="button-submit-filter-alphabet" type="submit" value="Envoyer">
-                </div>
-            </fieldset>
-        </form>
-        <form class="form-filterHome-concert" action="/" method="GET">
-            <!-- Champ de sélection pour les dates -->
-            <fieldset id="concert-section">
-                <legend>Filtre par Date de Concert</legend>
-                <label for="concert-date">Entrez la date d'un concert :</label>
-                <input type="date" name="concert-date" id="concert-date"><br>
-                <div class="submit-filter">
-                    <input id="button-submit-filter-dates" type="submit" value="Obtenir">
-                </div><br><br>
-                <table id="table-choiceBetweenTwoDates">
-                    <tbody>
-                        <tr>
-                            <td>
-                                <label class="label-searchDate" for="research-startDate">Date de début :</label>
-                                <input type="date" name="research-startDate" id="research-startDate" required>
-                            </td>
-                            <td id="td-2-DateResearch">
-                                <label class="label-searchDate" for="research-endDate">Date de fin :</label>
-                                <input type="date" name="research-endDate" id="research-endDate" required><br>
-                            </td>
-                        </tr>
-                    </tbody>    
-                </table>    
-                <div class="submit-filter">
-                    <input id="button-submit-filter-dates" type="submit" value="Obtenir">
-                </div>
-            </fieldset>
-        </form>
-            
-            <!-- Case à cocher pour activer des filtres par date -->
-        <form class="form-filterHome-creation" action="/" method="GET">
-            <fieldset id="creation-section">
-                <legend>Filtres par Dates de création du groupe</legend>
-                <label for="before-1980">Avant 1980 inclus</label>
-                <input type="checkbox" name="before-1980" id="before-1980"><br>
-                <label for="1980-1990">Entre 1980 et 1990 inclus</label>
-                <input type="checkbox" name="1980-1990" id="date_1980-1990"><br>
-                <label for="1990-2000">Entre 1990 et 2000 inclus</label>
-                <input type="checkbox" name="1990-2000" id="date_1990-2000"><br>
-                <label for="2000-2010">Entre 2000 et 2010 inclus</label>
-                <input type="checkbox" name="2000-2010" id="date_2000-2010"><br>
-                <label for="after 2010">Après 2010</label>
-                <input type="checkbox" name="after 2010" id="after-2010"><br>
-                <div class="submit-filter">
-                    <input id="button-submit-filter-creation" type="submit" value="Obtenir">
-                </div>
-            </fieldset>
-        </form>
-
-        <div class="card-container">
+        <nav class="card-container">
             <div class="artist-list">
                 {{range .Artists}}
                     <div class="card" id="card" onclick="flipCard(this)">
@@ -116,7 +120,8 @@
                     <p>Aucun artiste trouvé.</p>
                 {{end}}
             </div>
-        </div>
+        </nav>
+        
     
         <!--<h1 id="groupTitlePage">{{.TitleGroup}}</h1>
 
@@ -163,7 +168,7 @@
             {{else}}
                 <p>Aucun artiste trouvé.</p>
             {{end}}-->
-    </div>
+    </main>
 
     <script>
         function flipCard(button) {
