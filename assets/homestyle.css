@@ -16,6 +16,7 @@ body {
     background-color: #efefef;
 }
 
+/* Mise en forme concernant le titre et le sous-titre */
 #groupTitlePage {
     text-align: center;
     text-decoration: underline;
@@ -30,9 +31,22 @@ body {
     color: #646363;
 }
 
+****************************************
+
+/* Mise en forme concernant les filtres */
+
+/* Mise en forme concernant l'ensemble des filtres */
+
 #filters {
     font-size: 29px;
     margin: 10px 0px 0px 28px;
+}
+
+.submit-filter {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    padding: 10px 0;
 }
 
 .form-filterHome-alphabet, .form-filterHome-concert, .form-filterHome-creation {
@@ -41,6 +55,32 @@ body {
     font-weight: 470;
 }
 
+#button-submit-filter-alphabet, #button-submit-filter-concert, #button-submit-filter-dates, #button-submit-filter-creation {
+    font-size: 16px;
+    height: 32px;
+    width: 83px;
+    padding-bottom: 15px;
+    background-color: #4f78e9;
+    border-radius: 7px;
+    cursor: pointer;
+    border: #4f78e9 double 3px;
+}
+
+#button-submit-filter-alphabet:hover, #button-submit-filter-concert:hover, #button-submit-filter-dates:hover, #button-submit-filter-creation:hover {
+    background-color: #5d85f5;
+    transform: scale(1.1);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+}
+
+#button-submit-filter-alphabet:active, #button-submit-filter-concert:active, #button-submit-filter-dates:active, #button-submit-filter-creation:active {
+    background-color: #5d85f5;
+    transform: scale(0.9);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+*****************************************************************
+
+/* Mise en forme concernant la sous-section des filtres permettant d'aller dans l'ordre alphabétique ou non */
 #read-section {
     background-color: rgba(170, 200, 40, 0.4);
     padding-left: 10px;
@@ -191,35 +231,9 @@ body {
     box-shadow: 2px 2px 7px 5px #474747;
 }
 
-.submit-filter {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    padding: 10px 0;
-}
 
-#button-submit-filter-alphabet, #button-submit-filter-concert, #button-submit-filter-dates, #button-submit-filter-creation {
-    font-size: 16px;
-    height: 32px;
-    width: 83px;
-    padding-bottom: 15px;
-    background-color: #4f78e9;
-    border-radius: 7px;
-    cursor: pointer;
-    border: #4f78e9 double 3px;
-}
 
-#button-submit-filter-alphabet:hover, #button-submit-filter-concert:hover, #button-submit-filter-dates:hover, #button-submit-filter-creation:hover {
-    background-color: #5d85f5;
-    transform: scale(1.1);
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
-}
 
-#button-submit-filter-alphabet:active, #button-submit-filter-concert:active, #button-submit-filter-dates:active, #button-submit-filter-creation:active {
-    background-color: #5d85f5;
-    transform: scale(0.9);
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-}
 
 .card-container {
     display: flex;
