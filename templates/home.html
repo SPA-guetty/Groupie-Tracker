@@ -99,7 +99,6 @@
                                 <p id="dateOfCreat">Année de création: {{.CreationDate}}</p>
                             </div>
                             <button class="flip-button" onclick="flipCard(this)">View more</button>
-                            <!--<button class="flip-button" onclick="document.querySelector('.card').classList.add('flipped')">View more</button>-->
                         </div>
                         <div class="card-back">
                             <div class="card-content">
@@ -110,11 +109,7 @@
                                         <li>{{.}}</li>
                                     {{end}}
                                 </ul> 
-                                <p id="concert-location">Lieu de concert: {{.Locations}}</p>
-                                <p id="concert-dates">Dates de concert: {{.ConcertDates}}</p>
                             </div>
-                            <button class="flip-button" onclick="flipCard(this)">Return</button>
-                            <!--<button class="flip-button" onclick="document.querySelector('.card').classList.remove('flipped')">Return</button>-->
                         </div>
                     </div>
                 {{else}}
