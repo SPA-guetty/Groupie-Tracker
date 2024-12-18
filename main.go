@@ -42,6 +42,13 @@ func ArtHandler(w http.ResponseWriter, req *http.Request) {
 		artists = autors.Filter_By_Name(artists)
 	}
 
+	categorie2 := req.URL.Query().Get("categorie2")
+    if categorie2 == "reverseCreation" {
+        artists = autors.Filter_By_Creation_Reversed(artists)
+    } else {
+        artists = autors.Filter_By_Creation(artists)
+    }
+
 	// Données pour le template
 	pageData := PageData{
 		TitleGroup: "Groupie Trackers",

@@ -55,7 +55,7 @@ body {
     font-weight: 470;
 }
 
-#button-submit-filter-alphabet, #button-submit-filter-concert, #button-submit-filter-dates, #button-submit-filter-creation {
+#button-submit-filter-alphabet, #button-submit-filter-concert, #button-submit-filter-dates, #button-submit-filter-sens-creation, #button-submit-filter-creation {
     font-size: 16px;
     height: 32px;
     width: 83px;
@@ -66,13 +66,13 @@ body {
     border: #4f78e9 double 3px;
 }
 
-#button-submit-filter-alphabet:hover, #button-submit-filter-concert:hover, #button-submit-filter-dates:hover, #button-submit-filter-creation:hover {
+#button-submit-filter-alphabet:hover, #button-submit-filter-concert:hover, #button-submit-filter-dates:hover, #button-submit-filter-sens-creation:hover, #button-submit-filter-dates:hover, #button-submit-filter-creation:hover {
     background-color: #5d85f5;
     transform: scale(1.1);
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
 }
 
-#button-submit-filter-alphabet:active, #button-submit-filter-concert:active, #button-submit-filter-dates:active, #button-submit-filter-creation:active {
+#button-submit-filter-alphabet:active, #button-submit-filter-concert:active, #button-submit-filter-dates:active, #button-submit-filter-sens-creation:active, #button-submit-filter-creation:active {
     background-color: #5d85f5;
     transform: scale(0.9);
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
