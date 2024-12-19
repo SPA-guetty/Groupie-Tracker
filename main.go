@@ -78,12 +78,11 @@ func ArtGetInfo(w http.ResponseWriter, req *http.Request) {
 
 	for _, artist := range artists {
 		if artist.Name == target {
-			tmpl, err := template.New("home").ParseFiles("templates/home.html")
+			tmpl, err := template.New("artistinfo").ParseFiles("templates/artistinfo.html")
 			if err != nil {
 				http.Error(w, fmt.Sprintf("Erreur lors du chargement du template: %v", err), http.StatusInternalServerError)
 				return
 			}
-			fmt.Println(artist)
 			err = tmpl.Execute(w, artist)
 			if err != nil {
 				http.Error(w, fmt.Sprintf("Erreur lors de l'exécution du template: %v", err), http.StatusInternalServerError)
