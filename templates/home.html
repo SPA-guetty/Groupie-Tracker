@@ -110,7 +110,9 @@
                                 <h2 id="artistName">{{.Name}}</h2>
                                 <p id="dateOfCreat">Année de création: {{.CreationDate}}</p>
                             </div>
-                            <button class="flip-button" onclick="flipCard(this)">View more</button>
+                            <form action="/artistinfo" method="GET">
+                                <button type="submit" class="button" name="artist" value="{{.Name}}">Jouer</button>
+                            </form>
                         </div>
                         <div class="card-back">
                             <div class="card-content">

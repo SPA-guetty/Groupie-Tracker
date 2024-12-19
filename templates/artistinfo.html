@@ -1,15 +1,15 @@
 {{ define "artistinfo" }}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="static/artist.css"/>    
-    <title>{{.ArtistPage}}</title>
+    <title>{{.Name}}</title>
 </head>
 <body>
     <div class="container">
-        <h1 id="artistName">{{.ArtistName}}</h1>
+        <h1 id="artistName">{{.Name}}</h1>
 
         <div class="message">
             <p id="explication">Choisissez votre groupe préféré ou rechercher graçe aux différents filtres</p>
@@ -41,7 +41,7 @@
         
     </div>
     <div class="artist">
-        <img src="{{.artist}}" alt="Image de l'artiste à chercher" style="max-width: 100px; max-height: 100px;"/>
+        <img src="{{.Image}}" alt="Image de l'artiste à chercher" style="max-width: 100px; max-height: 100px;"/>
     </div>
     <a href="/">
         <button id="returnHome">Retour à la page d'accueil</button>

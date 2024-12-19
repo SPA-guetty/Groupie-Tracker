@@ -18,6 +18,7 @@ var port = ":8080"
 func main() {
 	// Routes du serveur
 	http.HandleFunc("/", ArtHandler)
+	http.HandleFunc("/artistinfo", ArtGetInfo)
 
 	// Serveur de fichiers statiques pour les images et fichiers css
 	fileServer := http.FileServer(http.Dir("./assets"))
@@ -30,9 +31,6 @@ func main() {
 func ArtHandler(w http.ResponseWriter, req *http.Request) {
 	// Récupérer les données des artistes
 	artists, err := autors.GetArtists()
-	if err != nil {
-		log.Fatalf("Erreur lors de la récupération des artistes: %v", err)
-	}
 
 	// Vérifier le paramètre de tri
 	categorie := req.URL.Query().Get("categorie")
@@ -66,4 +64,33 @@ func ArtHandler(w http.ResponseWriter, req *http.Request) {
 	if err != nil {
 		http.Error(w, fmt.Sprintf("Erreur lors de l'exécution du template: %v", err), http.StatusInternalServerError)
 	}
+}
+
+func ArtGetInfo(w http.ResponseWriter, req *http.Request) {
+	if req.Method != "GET" {
+		fmt.Println(req.Method)
+		http.Redirect(w, req, "/", http.StatusSeeOther)
+		return
+	}
+	target := req.FormValue("artist")
+	fmt.Println("ariste = ", target)
+	artists, _ := autors.GetArtists()
+
+	for _, artist := range artists {
+		if artist.Name == target {
+			tmpl, err := template.New("home").ParseFiles("templates/home.html")
+			if err != nil {
+				http.Error(w, fmt.Sprintf("Erreur lors du chargement du template: %v", err), http.StatusInternalServerError)
+				return
+			}
+			fmt.Println(artist)
+			err = tmpl.Execute(w, artist)
+			if err != nil {
+				http.Error(w, fmt.Sprintf("Erreur lors de l'exécution du template: %v", err), http.StatusInternalServerError)
+			}
+			return
+		}
+	}
+	fmt.Println("Erreur lors du chargement de l'ariste, retour à la page principale")
+	ArtHandler(w, req)	
 }
