@@ -59,19 +59,16 @@ func ReadLocation2(body []byte) []location {
 		fmt.Println("Error:", err2)
 	}
 	index := api["index"]
-	var art0 location
+	var art0 location //Création d'un artiste vide pour garder les Id en place
 	index = append([]location{art0}, index...)
-	for _, e := range index {
-		fmt.Println(e, "\n")
-	}
 	return index
 }
 
-func OpenAllLocations() {
+func OpenAllLocations() []location {
 	url := "https://groupietrackers.herokuapp.com/api/locations"
 	req, _ := http.NewRequest("GET", url, nil)
 	res, _ := http.DefaultClient.Do(req)
 	defer res.Body.Close()
 	body, _ := ioutil.ReadAll(res.Body)
-	_ = ReadLocation2(body)
+	return ReadLocation2(body)
 }

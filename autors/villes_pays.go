@@ -29,21 +29,21 @@ func Contains(tab []string, str string) bool {
 	return false
 }
 
-func Get_All_Locations(artists []Artist) ([]string, []string) {
+func Get_All_Locations() ([]string, []string) {
 	var cities []string
 	var countries []string
-	for _, artist := range artists {
-		locations := OpenLocation(artist.Id) 
-		for _, location := range locations.Locations {
-			city, country := Disband_Location(location)
+	locations := OpenAllLocations() 
+	for _, location := range locations {
+		for _, place := range location.Locations {
+			city, country := Disband_Location(place)
 			if !Contains(cities, city) {
 				cities = append(cities, city)
 			}
 			if !Contains(countries, country) {
 				countries = append(countries, country)
 			}
-		} 
-	}
+		}
+	} 
 	return cities, countries
 }
 
@@ -64,8 +64,8 @@ func Filter_By_Alp(tab []string) []string {
 	return new_tab
 }
 
-func Print_Locations(tab []Artist) {
-	cities, countries := Get_All_Locations(tab)
+func Print_Locations() {
+	cities, countries := Get_All_Locations()
 	cities = Filter_By_Alp(cities)
 	countries = Filter_By_Alp(countries)
 	for _, e := range cities {
