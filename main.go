@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	"groupie_tracker/autors"
+	"groupietracker/autors"
 	"html/template"
 	"log"
 	"net/http"
