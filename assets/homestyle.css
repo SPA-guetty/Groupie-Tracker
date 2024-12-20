@@ -294,7 +294,7 @@ body {
     transform: rotateY(180deg);
 }
 
-.flip-button {
+#artist {
     position: absolute;
     width: 120px;
     bottom: 5px;
@@ -303,17 +303,17 @@ body {
     border: #265df2 double 4px;
     border-radius: 10px;
     font-size: 16px;
-    color: #fff;
+    color: #ffffff;
     background-color: #4070f4;
     cursor: pointer;
     transition: all 0.3s ease;
 }
 
-.flip-button:hover {
+.gettheartist:hover {
     background: #265df2;
 }
 
-.flip-button:active {
+.gettheartist:active {
     transform:scale(0.9);
     background: #4070f4;
 }

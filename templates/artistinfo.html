@@ -8,13 +8,12 @@
     <title>{{.Name}}</title>
 </head>
 <body>
+    <div id="artist-img">
+        <img id="artist-img" src="{{.Image}}" alt="Image de {{.Name}}"/>
+    </div>
     <div class="container">
-        <h1 id="artistName">{{.Name}}</h1>
 
-        <div class="message">
-            <p id="explication">Choisissez votre groupe préféré ou rechercher graçe aux différents filtres</p>
-        </div>
-    
+        
         <h2>Filtres</h2>
     
     <form action=".go" method="GET">
@@ -39,9 +38,6 @@
         <input type="submit" value="Envoyer">
     </form>
         
-    </div>
-    <div class="artist">
-        <img src="{{.Image}}" alt="Image de l'artiste à chercher" style="max-width: 100px; max-height: 100px;"/>
     </div>
     <a href="/">
         <button id="returnHome">Retour à la page d'accueil</button>
