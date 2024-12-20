@@ -30,6 +30,7 @@ func main() {
 func ArtHandler(w http.ResponseWriter, req *http.Request) {
 	// Récupérer les données des artistes
 	artists, err := autors.GetArtists()
+	autors.Print_Locations(artists)
 	if err != nil {
 		log.Fatalf("Erreur lors de la récupération des artistes: %v", err)
 	}
