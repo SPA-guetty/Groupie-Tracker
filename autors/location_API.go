@@ -50,3 +50,28 @@ func OpenLocation(idint int) location {
 	body, _ := ioutil.ReadAll(res.Body)
 	return ReadLocation(body)
 }
+
+func ReadLocation2(body []byte) []location {
+	var api map[string][]location
+
+	err2 := json.Unmarshal([]byte(body), &api)
+	if err2 != nil {
+		fmt.Println("Error:", err2)
+	}
+	index := api["index"]
+	var art0 location
+	index = append([]location{art0}, index...)
+	for _, e := range index {
+		fmt.Println(e, "\n")
+	}
+	return index
+}
+
+func OpenAllLocations() {
+	url := "https://groupietrackers.herokuapp.com/api/locations"
+	req, _ := http.NewRequest("GET", url, nil)
+	res, _ := http.DefaultClient.Do(req)
+	defer res.Body.Close()
+	body, _ := ioutil.ReadAll(res.Body)
+	_ = ReadLocation2(body)
+}
