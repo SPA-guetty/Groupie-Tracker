@@ -1,7 +1,7 @@
 package autors
 
 import (
-	"groupietracker/concertdates"
+	"groupie_tracker/concertdates"
 	"strconv"
 )
 
@@ -102,7 +102,7 @@ func Get_Between_Dates(targetmin string, targetmax string, tab []Artist) []Artis
 		data := concertdates.OpenDates(strconv.Itoa(artist.Id))
 		for _, date := range data.Dates {
 			date = Invert_Dates(date)
-			if (date >= targetmin && date <= targetmax) {
+			if date >= targetmin && date <= targetmax {
 				newtab = append(newtab, artist)
 				break
 			}

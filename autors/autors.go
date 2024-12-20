@@ -13,8 +13,7 @@ type Artist struct {
 	Image        string   `json:"image"`
 	Name         string   `json:"name"`
 	Members      []string `json:"members"`
-	CreationDate int      `json:"creationDate"` // Utiliser int au lieu de string
-	FirstAlbum   string   `json:"firstAlbum"`
+	CreationDate int      `json:"creationDate"`
 	Locations    string   `json:"locations"`
 	ConcertDates string   `json:"concertDates"`
 	Relations    string   `json:"relations"`
@@ -59,9 +58,9 @@ func GetArtists() ([]Artist, error) {
 	}
 
 	/*
-	for _, e := range artists {
-		fmt.Println("Artiste:", e.Name)
-	}*/
+		for _, e := range artists {
+			fmt.Println("Artiste:", e.Name)
+		}*/
 
 	return artists, nil
 }
