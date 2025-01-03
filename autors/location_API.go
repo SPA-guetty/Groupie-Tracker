@@ -5,7 +5,6 @@ import (
 	"fmt"
 	"io/ioutil"
 	"net/http"
-	"strconv"
 )
 
 type location struct {
@@ -29,21 +28,21 @@ func Length(url string) int {
 	return nb
 }
 
-func ReadLocation(body []byte) location {
-	var artist location
-	err2 := json.Unmarshal([]byte(body), &artist)
+func ReadLocation(body []byte) []location {
+	var api map[string][]location
+
+	err2 := json.Unmarshal([]byte(body), &api)
 	if err2 != nil {
 		fmt.Println("Error:", err2)
 	}
-	return artist
+	index := api["index"]
+	var art0 location //Création d'un artiste vide pour garder les Id en place
+	index = append([]location{art0}, index...)
+	return index
 }
 
-func OpenLocation(idint int) location {
-	id := strconv.Itoa(idint)
-	if idint < 1 || idint > Length("https://groupietrackers.herokuapp.com/api/locations") {
-		fmt.Println("Error: locations index is out of range")
-	}
-	url := "https://groupietrackers.herokuapp.com/api/locations/" + id
+func OpenAllLocations() []location {
+	url := "https://groupietrackers.herokuapp.com/api/locations"
 	req, _ := http.NewRequest("GET", url, nil)
 	res, _ := http.DefaultClient.Do(req)
 	defer res.Body.Close()
