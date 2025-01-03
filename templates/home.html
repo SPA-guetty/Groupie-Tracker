@@ -34,6 +34,7 @@
                         </div>
                     </fieldset>
                 </form>
+                
                 <form class="form-filterHome-concert" action="/" method="GET">
                     <!-- Champ de sélection pour les dates -->
                     <fieldset id="concert-section">
@@ -96,7 +97,7 @@
         <nav class="card-container">
             <div class="artist-list">
                 {{range .Artists}}
-                    <div class="card" id="card" onclick="flipCard(this)">
+                    <div class="card" onclick="flipAndAnimateCard(this)">
                         <div class="card-front">
                             <div class="image-content">
                                 <span class="overlay"></span>
@@ -110,9 +111,7 @@
                                 <h2 id="artistName">{{.Name}}</h2>
                                 <p id="dateOfCreat">Année de création: {{.CreationDate}}</p>
                             </div>
-                            <form action="/artistinfo" method="GET">
-                                <button type="submit" id="gettheartist" name="artist" value="{{.Name}}">Infos</button>
-                            </form>
+                            <button class="flip-button" onclick="flipAndAnimateCard(this)">View more</button>
                         </div>
                         <div class="card-back">
                             <div class="card-content">
@@ -124,6 +123,7 @@
                                     {{end}}
                                 </ul> 
                             </div>
+                            <button class="return-button" onclick="flipAndAnimateInitialCard(this)">Return</button>
                         </div>
                     </div>
                 {{else}}
@@ -131,61 +131,83 @@
                 {{end}}
             </div>
         </nav>
-        
-    
-        <!--<h1 id="groupTitlePage">{{.TitleGroup}}</h1>
 
-        <div class="message">
-            <p id="explication">Choisissez votre groupe préféré ou recherchez grâce aux différents filtres</p>
-        </div>
-    
-        <h2>Filtres</h2>
-        <form action=".go" method="GET">-->
-            <!-- Champ de sélection pour les catégories -->
-            <!--<label for="categorie">Catégorie:</label>
-            <select id="categorie" name="categorie">
-                <option value="normalSens">A-Z</option>
-                <option value="reverseSens">Z-A</option>
-                <option value="date">Date</option>
-                <option value=""></option>
-            </select><br><br>-->
-
-            
-            <!--<label for="date">Date:</label>
-            <input type="date" id="date" name="date"><br><br>
-
-            
-            <label for="extra_filters">Activer les filtres supplémentaires:</label>
-            <input type="checkbox" id="extra_filters" name="extra_filters" value="oui"><br><br>
-
-            
-            <input type="submit" value="Envoyer">
-        </form>
-        
-        <h2>Artistes</h2>
-        <div class="artist-list">-->
-            <!-- Afficher les artistes récupérés depuis le back-end -->
-            <!--{{range .Artists}}
-                <div class="artist">
-                    <img src="{{.Image}}" alt="Image de {{.Name}}" style="max-width: 200px; max-height: 200px;"/>
-                    <h3 id="nameArtist">{{.Name}}</h3>
-                    <p>Année de création: {{.CreationDate}}</p>
-                    <p>Premier album: {{.FirstAlbum}}</p>
-                    <p>Membres: {{range .Members}} {{.}} {{end}}</p>
-                    <p>Lieu de concert: {{.Locations}}</p>
-                    <p>Dates de concert: {{.ConcertDates}}</p>
-                </div>
-            {{else}}
-                <p>Aucun artiste trouvé.</p>
-            {{end}}-->
     </main>
 
+    <!-- Champ permettant de gérer les animations en JavaScript -->
     <script>
-        function flipCard(button) {
-            var card = button.closest('.card');
-            card.classList.toggle('flipped');
+        // Variable permettant de stocker la position initiale de la carte
+        let initialPosition = { top: 0, left: 0 };
+
+        // Fonction permettant l'animation pour permettre à la carte de se déplacer vers le centre, de se retourner et de s'agrandir
+        function flipAndAnimateCard(button) {
+            const cards = document.querySelectorAll('.card');
+            const currentCard = button.closest('.card');
+
+            // Calculer la position initiale de la carte si elle n'a pas été encore enregistrée
+            if (!initialPosition.top && !initialPosition.left) {
+                const cardRect = currentCard.getBoundingClientRect();
+                initialPosition = {
+                    top: cardRect.top + window.scrollY,
+                    left: cardRect.left + window.scrollX
+                };
+            }
+
+            // Vérifier si la carte est déjà centrée ou non
+            const isCentered = currentCard.classList.contains('centered');
+
+            if (!isCentered) {
+                // Enlever la classe 'centered' de l'autre carte qui est au centre
+                cards.forEach(c => {
+                    c.classList.remove('centered');
+                });
+
+                // Permettre d'avoir la position initiale de la carte
+                currentCard.style.top = `${cardPosition.top}px`;
+                currentCard.style.left = `${cardPosition.left}px`;
+
+                // Attendre un court instant avant de commencer l'animation
+                setTimeout(() => {
+                    currentCard.classList.add('centered');
+                    currentCard.style.transition = 'transform 2s ease-in-out, top 2s ease, left 2s ease';
+                    currentCard.style.transform = 'translate(-50%, -50%) scale(2) rotateY(180deg)';
+                }, 10);
+            } else {
+                // Si la carte est déjà centrée, on la remet à sa position initiale
+                currentCard.classList.remove('centered');
+                currentCard.style.transition = 'transform 2s ease-in-out, top 2s ease, left 2s ease';
+                currentCard.style.transform = 'translate(0, 0) scale(1) rotateY(0deg)';
+                currentCard.style.top = `${cardPosition.top}px`;
+                currentCard.style.left = `${cardPosition.left}px`;
+            }
+        }
+
+        function flipAndAnimateCard(card) {
+            const cards = document.querySelectorAll('.card');            
+            cards.forEach(c => c.classList.remove('centered')); // Enlever la classe 'centered' de l'autre carte qui est au centre
+            card.classList.add('centered');
+        }
+
+        function flipAndAnimateInitialCard(button) {
+            const currentCard = button.closest('.card');
+    
+            // Disparition de la carte
+            currentCard.style.transition = 'transform 2s ease-in-out, opacity 2s ease-in-out';
+            currentCard.style.transform = 'rotateY(180deg) scale(0.1)';
+            currentCard.style.opacity = '0';
+            
+            // 2secondes de Timeout à la fin de l'animation avant la réinitialisation
+            setTimeout(() => {
+                currentCard.classList.remove('centered');
+                currentCard.style.transition = ''; // Suppression de la transition après l'animation terminée
+                currentCard.style.transform = ''; // Réinitialisation de la transformation
+                currentCard.style.opacity = '';
+                currentCard.style.top = '';
+                currentCard.style.left = '';
+            }, 2000);
         }
     </script>
+
 </body>
 </html>
 {{ end }}
