@@ -40,7 +40,7 @@ func ReadLocation(body []byte) location {
 
 func OpenLocation(idint int) location {
 	id := strconv.Itoa(idint)
-	if (idint < 1 || idint > Length("https://groupietrackers.herokuapp.com/api/locations")) {
+	if idint < 1 || idint > Length("https://groupietrackers.herokuapp.com/api/locations") {
 		fmt.Println("Error: locations index is out of range")
 	}
 	url := "https://groupietrackers.herokuapp.com/api/locations/" + id
