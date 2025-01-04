@@ -240,7 +240,7 @@ body {
 }
 
 
-/*************** Mise en forme concernant les cards ******************/
+/*************** Mise en forme concernant les cards en général ******************/
 
 .card-container {
     /*position: relative;*/
@@ -273,40 +273,6 @@ body {
     z-index: 1;
 }
 
-.card .card-front {
-    /*position: absolute;*/
-    backface-visibility: hidden;
-    background: #fff;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-    transition: transform 0.6s ease-in-out;
-    transform: rotateY(0deg);
-    /*padding: 10px;*/
-}
-
-.card .card-back {
-    /*width: 100%;
-    height: 100%;*/
-    background: #eeecec;
-    /*position: absolute;*/
-    /*top: 0;
-    left: 0;*/
-    backface-visibility: hidden;
-    transition: transform 0.6s ease-in-out;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-    /*padding: 10px;*/
-    border-radius: 8px;
-    transition: transform 0.6s ease-in-out;
-    transform: rotateY(180deg);
-    color: rgb(2, 2, 2);
-    padding: 10px;
-}
-
 .card.centered {
    position: fixed; /* Changez de 'absolute' à 'fixed' pour centrer dans toute la fenêtre */
    top: 50%;  /* Centrage vertical */
@@ -317,6 +283,38 @@ body {
    transition: transform 2s ease-in-out, top 2s ease, left 2s ease;
 }
 
+.card-front, .card-back {
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+}
+
+/*////////////// Mise en forme concernant la coté front \\\\\\\\\\\\\\\\*/
+
+.card .card-front {
+    /*position: absolute;*/
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    transition: transform 0.6s ease-in-out;
+    transform: rotateY(0deg);
+    /*padding: 10px;*/
+}
+
+.card-front {
+    border-radius: 25px;
+    background-color: #fff;
+    transform: rotateY(0deg);
+}
+
+.card-content-front {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 5px;
+}
 
 .card .image-content {
     position: relative;
@@ -328,22 +326,6 @@ body {
     width: 100%;
     height: auto;
     border-radius: 8px;
-}
-
-.card-front, .card-back {
-    position: absolute;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    backface-visibility: hidden;
-}
-
-/*////////////// Mise en forme concernant la coté front \\\\\\\\\\\\\\\\*/
-
-.card-front {
-    border-radius: 25px;
-    background-color: #fff;
-    transform: rotateY(0deg);
 }
 
 .overlay {
@@ -401,23 +383,9 @@ body {
     border: 4px solid #4070f4;
 }
 
-.card-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 5px;
-}
-
-#artistName {
-    font-size: 18px;
-    font-weight: 500;
-    color: #333;
-    z-index: 4;
-}
-
 #dateOfCreat {
-    font-size: 0.98em;
-    line-height: 1.95em;
+    font-size: 0.98rem;
+    line-height: 1.95rem;
     color: #707070;
     text-align: center;
 }
@@ -448,18 +416,71 @@ body {
 
 /*/////////////// Mise en forme concernant la coté back \\\\\\\\\\\\\\\\*/
 
+.card .card-back {
+    width: 100%;
+    height: 100%;
+    background: #eeecec;
+    position: absolute;
+    top: 0;
+    left: 0;
+    backface-visibility: hidden;
+    transition: transform 0.6s ease-in-out;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    /*align-items: center;*/
+    /*padding: 10px;*/
+    border-radius: 8px;
+    transition: transform 0.6s ease-in-out;
+    transform: rotateY(180deg);
+    color: rgb(2, 2, 2);
+    padding: 1rem;
+}
+
 .card-back {
     border-radius: 25px;
     background-color: #fff;
-    transform: rotateY(180deg);
-    transition: transform 0.5s ease;
+}
+
+.card-content-back {
+    /*display: flex;
+    flex-direction: column;*/
+    /*align-items: center;*/
+    margin-top: 5px;
+}
+
+#artistName {
+    font-size: 1.15rem;
+    font-weight: 500;
+    color: #333;
+    z-index: 4;
+}
+
+#firstAlbum {
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: #6453fa;
+    line-height: 1.5rem;
+    margin-top: -1rem;
 }
 
 #members {
-    font-size: 18px;
+    font-size: 1rem;
     font-weight: 500;
     color: #333;
-    text-align: center;
+    margin-left: 1rem;
+    text-decoration: underline black;
+    line-height: 1.8rem;
+}
+
+.list-member {
+    /*display: flex;
+    flex-direction: column;*/
+}
+
+.album-member {
+    font-size: 0.85rem;
+    margin-left: 1rem;
 }
 
 /* Transition pour remettre la carte à sa position initiale */

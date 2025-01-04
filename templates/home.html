@@ -107,19 +107,19 @@
                                 </div>
                             </div>
 
-                            <div class="card-content">
+                            <div class="card-content-front">
                                 <h2 id="artistName">{{.Name}}</h2>
                                 <p id="dateOfCreat">Année de création: {{.CreationDate}}</p>
                             </div>
                             <button class="flip-button" onclick="flipAndAnimateCard(this)">View more</button>
                         </div>
                         <div class="card-back">
-                            <div class="card-content">
-                                <p id="firstAlbum">Premier album: {{.FirstAlbum}}</p>
+                            <div class="card-content-back">
+                                <p id="firstAlbum"> ---> Premier album: {{.FirstAlbum}} <--- </p>
                                 <h2 id="members">Membres :</h2>
-                                <ul>
+                                <ul class="list-members">
                                     {{range .Members}}
-                                        <li>{{.}}</li>
+                                        <li class="album-member">{{.}}</li>
                                     {{end}}
                                 </ul> 
                             </div>
@@ -194,7 +194,7 @@
             // Disparition de la carte
             currentCard.style.transition = 'transform 2s ease-in-out, opacity 2s ease-in-out';
             currentCard.style.transform = 'rotateY(180deg) scale(0.1)';
-            currentCard.style.opacity = '0';
+            currentCard.style.opacity = '1'; // Permet à la carte de disparaître du côté back et non front ce qui aurait été la valeur (0)
             
             // 2secondes de Timeout à la fin de l'animation avant la réinitialisation
             setTimeout(() => {
