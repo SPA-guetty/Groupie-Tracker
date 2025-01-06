@@ -121,6 +121,14 @@
                                     {{range .Members}}
                                         <li class="album-member">{{.}}</li>
                                     {{end}}
+                                </ul>
+                                
+                                <!-- Ajoutez ici l'affichage des concerts -->
+                                <h3 id="concerts">Concerts :</h3>
+                                <ul class="concerts-list">
+                                    {{range .Concerts}}
+                                        <li>{{.}}</li>
+                                    {{end}}
                                 </ul> 
                             </div>
                             <button class="return-button" onclick="flipAndAnimateInitialCard(this)">Return</button>
