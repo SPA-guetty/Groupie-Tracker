@@ -16,7 +16,234 @@ body {
     background-color: #efefef;
 }
 
+/* Mise en forme concernant le titre et le sous-titre */
+#groupTitlePage {
+    text-align: center;
+    text-decoration: underline;
+    font-size: 40px;
+    color: #2993c5;
+}
+
+#explication {
+    text-align: center;
+    font-size: 22px;
+    font-weight: 500;
+    color: #646363;
+}
+
+/*************** Mise en forme concernant les filtres ******************/
+
+/*----------- Mise en forme concernant l'ensemble des filtres ----------------*/
+
+#filters {
+    font-size: 29px;
+    margin: 10px 0px 0px 28px;
+}
+
+.submit-filter {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    padding: 10px 0;
+}
+
+#categorie, #categorie2 {
+    border-radius: 7px;
+    height: 30px;
+    text-align: center;
+    font-weight: 600;
+}
+
+#categorie:hover, #categorie2:hover {
+    box-shadow: 2px 2px 7px 5px #474747;
+}
+
+/*-------------- Mise en forme concernant les sections généralement ---------------*/
+
+.form-filterHome-alphabet, .form-filterHome-concert, .form-filterHome-creation {
+    font-size: 16.5px;
+    margin: 20px 0 20px 50px;
+    font-weight: 470;
+}
+
+#button-submit-filter-alphabet, #button-submit-filter-concert, #button-submit-filter-dates, #button-submit-filter-sens-creation, #button-submit-filter-creation {
+    font-size: 16px;
+    height: 32px;
+    width: 83px;
+    padding-bottom: 15px;
+    background-color: #4f78e9;
+    border-radius: 7px;
+    cursor: pointer;
+    border: #4f78e9 double 3px;
+}
+
+#button-submit-filter-alphabet:hover, #button-submit-filter-concert:hover, #button-submit-filter-dates:hover, #button-submit-filter-sens-creation:hover, #button-submit-filter-dates:hover, #button-submit-filter-creation:hover {
+    background-color: #5d85f5;
+    transform: scale(1.1);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+}
+
+#button-submit-filter-alphabet:active, #button-submit-filter-concert:active, #button-submit-filter-dates:active, #button-submit-filter-sens-creation:active, #button-submit-filter-creation:active {
+    background-color: #5d85f5;
+    transform: scale(0.9);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+/*/////////// Mise en forme concernant la section qui gère la gestion des cards par ordre alphabétique ou non \\\\\\\\\\\\\*/
+
+#read-section {
+    background-color: rgba(170, 200, 40, 0.4);
+    padding-left: 10px;
+    margin: -20px 40px 10px 0px;
+    border-radius: 7px;
+}
+
+#read-section > label {
+    padding-left: 20px;
+}
+
+/*/////////// Mise en forme concernant la section qui gère les Dates de Concerts \\\\\\\\\\\\\\\*/
+
+#concert-section {
+    background-color: rgba(123, 136, 209, 0.4);
+    padding-left: 10px;
+    margin: 10px 40px 10px 0px;
+    border-radius: 7px;
+}
+
+#concert-section > label {
+    padding-left: 20px;
+}
+
+#categorie {
+    width: 70px;
+}
+
+/* Sous-section qui gère une date de concert en particulier précisée sous forme de date*/
+
+#concert-date {
+    border-radius: 7px;
+    height: 30px;
+    width: 145px;
+    text-align: center;
+    font-weight: 600;
+}
+
+#concert-date:hover {
+    box-shadow: 2px 2px 7px 5px #474747;
+}
+
+/* Sous-section qui gère tous les artistes qui ont eu un concert entre 2 dates précises précisées sous de date*/
+
+
+/*/////////// Mise en forme concernant la section qui gère les Dates de Créations des groupes \\\\\\\\\\\\\*/
+
+#creation-section {
+    background-color: rgba(236, 142, 189, 0.4);
+    padding: 5px 0 5px 10px;
+    margin: 10px 40px 10px 0px;
+    border-radius: 7px;
+}
+
+#creation-section > label {
+    padding-left: 20px;
+}
+
+/* Sous-section qui gère l'ordre de création des groupe du plus récent au plus ancien par liste déroulante */
+
+#categorie2 {
+    width: 120px;
+}
+
+
+
+/* Sous-section qui gère les dates de création des groupes entre 2 dates mais choisi par des checkboxs */
+
+#table-choiceBetweenTwoDates {
+    margin: -30px 0px 15px 20px;
+}
+
+#label-searchDate {
+    display: inline-block;
+    margin-right: 10px;
+}
+
+#research-startDate {
+    border-radius: 7px;
+    height: 30px;
+    width: 145px;
+    text-align: center;
+    font-weight: 600;
+}
+
+#research-startDate {
+    box-shadow: 2px 2px 7px 5px #474747;
+}
+
+#research-endDate {
+    border-radius: 7px;
+    height: 30px;
+    width: 145px;
+    text-align: center;
+    font-weight: 600;
+    box-shadow: 2px 2px 7px 5px #474747;
+}
+
+#before-1980 {
+    height: 14px;
+    width: 14px;
+    margin-left: 60px;
+}
+
+#before-1980:hover {
+    box-shadow: 2px 2px 7px 5px #474747;
+}
+
+#date_1980-1990 {
+    height: 14px;
+    width: 14px;
+    margin-left: 5.2px;
+}
+
+#date_1980-1990:hover {
+    box-shadow: 2px 2px 7px 5px #474747;
+}
+
+#date_1990-2000 {
+    height: 14px;
+    width: 14px;
+    margin-left: 1.22px;
+}
+
+#date_1990-2000:hover {
+    box-shadow: 2px 2px 7px 5px #474747;
+}
+
+#date_2000-2010 {
+    height: 14px;
+    width: 14px;
+    margin-left: 2.16px;
+}
+
+#date_2000-2010:hover {
+    box-shadow: 2px 2px 7px 5px #474747;
+}
+
+#after-2010 {
+    height: 14px;
+    width: 14px;
+    margin-left: 115.1px;
+}
+
+#after-2010:hover {
+    box-shadow: 2px 2px 7px 5px #474747;
+}
+
+
+/*************** Mise en forme concernant les cards en général ******************/
+
 .card-container {
+    /*position: relative;*/
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -35,49 +262,107 @@ body {
 
 .card {
     position: relative;
-    width: 250px;
-    height: 500px;
+    width: 17rem;
+    height: 22.45rem;
+    border-radius: 2rem;
+    background-color: #fff;
+    perspective: 1000px;
+    transform-style: preserve-3d;
+    transition: transform 2s ease-in-out, top 2s ease, left 2s ease, width 1s ease-in-out, height 1s ease-in-out;
+    cursor: pointer;
+    z-index: 1;
+}
+
+.card.centered {
+   position: fixed; /* Changez de 'absolute' à 'fixed' pour centrer dans toute la fenêtre */
+   top: 50%;  /* Centrage vertical */
+   left: 50%; /* Centrage horizontal */
+   transform: translate(-50%, -50%) scale(2) rotateY(180deg); /* Centrer avec une échelle augmentée */
+   transform-style: preserve-3d;
+   z-index: 1000; /* Assurez-vous que la carte est au-dessus des autres éléments */
+   transition: transform 2s ease-in-out, top 2s ease, left 2s ease;
+}
+
+.card-front, .card-back {
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+}
+
+/*////////////// Mise en forme concernant la coté front \\\\\\\\\\\\\\\\*/
+
+.card .card-front {
+    /*position: absolute;*/
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    transition: transform 0.6s ease-in-out;
+    transform: rotateY(0deg);
+    /*padding: 10px;*/
+}
+
+.card-front {
     border-radius: 25px;
     background-color: #fff;
-       
+    transform: rotateY(0deg);
 }
 
-.image-content {
-    position: relative;
-    row-gap: 5px;
-    padding: 25px 0;
-}
-
-.image-content, .card-content{
+.card-content-front {
     display: flex;
-    flex-direction: column; 
-    align-items: center; 
-    padding: 10px 14px;
+    flex-direction: column;
+    align-items: center;
+}
+
+.card .image-content {
+    position: relative;
+    width: 100%;
+    height: 60%;
+}
+
+.card .image-content img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
 }
 
 .overlay {
     position: absolute;
     left: 0;
     top: 0;
-    height: 100%;
+    height: 93%;
     width: 100%;
     background-color: #4070f4;
-    border-radius: 25px 25px 0 25px;
+    border-radius: 1.55rem 1.55rem 0 1.55rem;
 }
 
 .overlay::before, .overlay::after {
     content: '';
     position: absolute;
     right: 0;
-    bottom: -40px;
-    height: 40px;
-    width: 40px;
+    bottom: -2.7rem;
+    height: 2.7rem;
+    width: 2.7rem;
     background-color: #4070f4;
 }
 
 .overlay::after {
-    border-radius: 0 25px 0 0;
+    border-radius: 0 1.55rem 0 0;
     background-color: #fff;
+}
+
+.image-content {
+    position: relative;
+    row-gap: 5px;
+    margin: 0 0 -2rem 0;
+}
+
+.image-content {
+    display: flex;
+    flex-direction: column; 
+    align-items: center; 
+    padding: 0.9rem 0.9rem 0;
 }
 
 #artist-image {
@@ -86,6 +371,7 @@ body {
     width: 150px;
     border-radius: 50%;
     background: #fff;
+    margin-top: 0.7rem;
     padding: 3px;
 }
 
@@ -97,99 +383,127 @@ body {
     border: 4px solid #4070f4;
 }
 
-#groupTitlePage {
-    text-align: center;
-    color: #333;
-}
-
-/*.artist-list {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-evenly;
-    gap: 20px;
-}*/
-
-/*.artist {
-    background-color: #fff;
-    border: solid black 2px;
-    border-radius: 10px;
-    padding: 10px;
-    width: 12%;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    text-align: center;
-}*/
-
-/*.artist img {
-    border-radius: 5px;
-    width: 99% ;
-    object-fit: cover;
-    margin-bottom: -10px;
-    border: black solid 2px;
-}*/
-
-/*#nameArtist {
-    font-size: 22px;
-}*/
-
-/*.artist > h3 {
-    font-weight: 800;
-    text-decoration: underline;
-}*/
-
-#artistName {
-    font-size: 18px;
-    font-weight: 500;
-    color: #333;
-}
-
 #dateOfCreat {
-    font-size: 14px;
+    font-size: 0.98rem;
+    line-height: 1.95rem;
     color: #707070;
     text-align: center;
 }
 
-#members {
-    font-size: 18px;
-    font-weight: 500;
-    color: #333;
-    text-align: center;
-}
-
-.button{
-    position: absolute;
-    bottom: 0px;
-    border: none;
-    border-radius: 10px;
-    font-size: 16px;
+.flip-button {
+    width: 7.5em;
+    height: 2.7em;
+    margin-bottom: 0.7rem;
+    left: 28%;
+    align-items: center;
+    border: #265df2 double 0.2em;
+    border-radius: 0.5em;
+    font-size: 0.95em;
     color: #fff;
-    padding: 6px 11px;
     background-color: #4070f4;
-    margin: 14px;
     cursor: pointer;
     transition: all 0.3s ease;
 }
 
-.button:hover {
+.flip-button:hover {
     background: #265df2;
 }
 
-/*.artist > p {
-    margin: 10px 0;
-    line-height: 23px;
-    word-wrap: break-word;
-}*/
+.flip-button:active {
+    transform:scale(0.9);
+    background: #4070f4;
+}
 
-/*#returnHome {
-    display: block;
-    margin: 20px auto;
-    padding: 10px 20px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}*/
+/*/////////////// Mise en forme concernant la coté back \\\\\\\\\\\\\\\\*/
 
-/*#returnHome:hover {
-    background-color: #0056b3;
-}*/
+.card .card-back {
+    width: 100%;
+    height: 100%;
+    background: #eeecec;
+    position: absolute;
+    top: 0;
+    left: 0;
+    backface-visibility: hidden;
+    transition: transform 0.6s ease-in-out;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    /*padding: 10px;*/
+    border-radius: 8px;
+    transition: transform 0.6s ease-in-out;
+    transform: rotateY(180deg);
+    color: rgb(2, 2, 2);
+    padding: 1rem;
+}
+
+.card-back {
+    border-radius: 25px;
+    background-color: #fff;
+}
+
+.card-content-back {
+    /*display: flex;
+    flex-direction: column;*/
+    /*align-items: center;*/
+    margin-top: 5px;
+}
+
+#artistName {
+    font-size: 1.15rem;
+    font-weight: 500;
+    color: #333;
+    z-index: 4;
+}
+
+#firstAlbum {
+    font-size: 0.7rem;
+    font-weight: 500;
+    color: #6453fa;
+    line-height: 1.15rem;
+    margin-top: -0.5rem;
+}
+
+#members {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #333;
+    margin-left: 1rem;
+    text-decoration: underline black;
+    line-height: 1.8rem;
+}
+
+.list-member {
+    /*display: flex;
+    flex-direction: column;*/
+}
+
+.album-member {
+    font-size: 0.85rem;
+    margin-left: 1rem;
+}
+
+/* Transition pour remettre la carte à sa position initiale */
+.return-button {
+   width: 6.9rem;
+   height: 2.3rem;
+   margin-bottom: 0.7rem;
+   left: 28%;
+   align-items: center;
+   border: #265df2 double 0.17rem;
+   border-radius: 0.375rem;
+   font-size: 0.7em;
+   color: #fff;
+   background-color: #4070f4;
+   cursor: pointer;
+   transition: all 0.3s ease;
+}
+
+.return-button:hover {
+   background: #265df2;
+}
+
+.return-button:active {
+   transform:scale(0.9);
+   background: #4070f4;
+}

@@ -6,7 +6,14 @@ import (
 	"io"
 	"log"
 	"net/http"
+	"groupie_tracker/concertdates"
+	"strconv"
 )
+
+type Concert struct {
+    Date    	 string   `json:"date"`
+    Location 	 string   `json:"location"`
+}
 
 type Artist struct {
 	Id           int      `json:"id"`
@@ -18,6 +25,7 @@ type Artist struct {
 	Locations    string   `json:"locations"`
 	ConcertDates string   `json:"concertDates"`
 	Relations    string   `json:"relations"`
+	Concerts     []string `json:"concerts"`  //Stocke les dates et lieux de concerts
 }
 
 func GetArtists() ([]Artist, error) {
@@ -58,10 +66,18 @@ func GetArtists() ([]Artist, error) {
 		return nil, err
 	}
 
-	/*
-		for _, e := range artists {
-			fmt.Println("Artiste:", e.Name)
-		}*/
+	// Ensuite, vous allez associer les concerts à chaque artiste
+	for i := range artists {
+		// Récupérer les données des concerts concernant les artistes à partir de l'ID
+		concertsData := concertdates.OpenDates(strconv.Itoa(artists[i].Id))
+		var concerts []Concert
+		for _, date := range concertsData.Dates {
+			concerts = append(concerts)
+			
+			location := artists[i].Locations
+			artists[i].Concerts = append(artists[i].Concerts, fmt.Sprintf("%s : %s", date, location))
+		}
+	}
 
 	return artists, nil
 }
