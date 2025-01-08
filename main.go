@@ -16,11 +16,11 @@ type PageData struct {
 var port = ":8080"
 
 func main() {
-	// Routes du serveur
+	// Server routes
 	http.HandleFunc("/", ArtHandler)
 	http.HandleFunc("/artistinfo", ArtGetInfo)
 
-	// Serveur de fichiers statiques pour les images et fichiers css
+	// Static file server for images and css files
 	fileServer := http.FileServer(http.Dir("./assets"))
 	http.Handle("/static/", http.StripPrefix("/static/", fileServer))
 
@@ -29,10 +29,16 @@ func main() {
 }
 
 func ArtHandler(w http.ResponseWriter, req *http.Request) {
-	// Récupérer les données des artistes
-	artists, err := autors.GetArtists()
+	// Retrieving artist data about and details like dates: locations
+	artists, err := autors.GetConcertDetails()
+	
+	if err != nil {
+        log.Println("Erreur lors de la récupération des artistes:", err)
+        http.Error(w, "Erreur lors de la récupération des artistes", http.StatusInternalServerError)
+        return
+    }
 
-	// Vérifier le paramètre de tri
+	// Checking sorting parameters
 	categorie := req.URL.Query().Get("categorie")
 	if categorie == "reverseSens" {
 		artists = autors.Filter_By_Name_Reversed(artists)
@@ -47,13 +53,13 @@ func ArtHandler(w http.ResponseWriter, req *http.Request) {
         artists = autors.Filter_By_Creation(artists)
     }
 
-	// Données pour le template
+	// Data for the template
 	pageData := PageData{
 		TitleGroup: "Groupie Trackers",
 		Artists:    artists,
 	}
 
-	// Charger et exécuter le template HTML
+	// Load and run the HTML template
 	tmpl, err := template.New("home").ParseFiles("templates/home.html")
 	if err != nil {
 		http.Error(w, fmt.Sprintf("Erreur lors du chargement du template: %v", err), http.StatusInternalServerError)

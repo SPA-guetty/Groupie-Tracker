@@ -123,13 +123,13 @@
                                     {{end}}
                                 </ul>
                                 
-                                <!-- Ajoutez ici l'affichage des concerts -->
-                                <h3 id="concerts">Concerts :</h3>
+                                <h2 id="concerts">Concerts :</h2>
                                 <ul class="concerts-list">
-                                    {{range .Concerts}}
+                                    <!--Permettra d'avoir la date de concert suivi du lieu du concert sous forme (date : lieu)-->
+                                    {{range .ConcertLocations}}
                                         <li>{{.}}</li>
                                     {{end}}
-                                </ul> 
+                                </ul>
                             </div>
                             <button class="return-button" onclick="flipAndAnimateInitialCard(this)">Return</button>
                         </div>
@@ -147,12 +147,12 @@
         // Variable permettant de stocker la position initiale de la carte
         let initialPosition = { top: 0, left: 0 };
 
-        // Fonction permettant l'animation pour permettre à la carte de se déplacer vers le centre, de se retourner et de s'agrandir
+        // Fonction permettant l'animation pour permettre à la card de se déplacer vers le centre, de se retourner et de s'agrandir
         function flipAndAnimateCard(button) {
             const cards = document.querySelectorAll('.card');
             const currentCard = button.closest('.card');
 
-            // Calculer la position initiale de la carte si elle n'a pas été encore enregistrée
+            // Calcule la position initiale de la card si elle n'est pas encore enregistrée
             if (!initialPosition.top && !initialPosition.left) {
                 const cardRect = currentCard.getBoundingClientRect();
                 initialPosition = {
@@ -161,20 +161,19 @@
                 };
             }
 
-            // Vérifier si la carte est déjà centrée ou non
+            // Vérification si la carte est déjà centrée ou non
             const isCentered = currentCard.classList.contains('centered');
 
             if (!isCentered) {
-                // Enlever la classe 'centered' de l'autre carte qui est au centre
+                // Enlève la classe 'centered' de l'autre card qui est au centre
                 cards.forEach(c => {
                     c.classList.remove('centered');
                 });
 
-                // Permettre d'avoir la position initiale de la carte
+                // Avoir la position initiale de la card
                 currentCard.style.top = `${cardPosition.top}px`;
                 currentCard.style.left = `${cardPosition.left}px`;
 
-                // Attendre un court instant avant de commencer l'animation
                 setTimeout(() => {
                     currentCard.classList.add('centered');
                     currentCard.style.transition = 'transform 2s ease-in-out, top 2s ease, left 2s ease';
@@ -191,8 +190,9 @@
         }
 
         function flipAndAnimateCard(card) {
-            const cards = document.querySelectorAll('.card');            
-            cards.forEach(c => c.classList.remove('centered')); // Enlever la classe 'centered' de l'autre carte qui est au centre
+            const cards = document.querySelectorAll('.card');
+            // Enlever la classe 'centered' de l'autre carte qui est au centre            
+            cards.forEach(c => c.classList.remove('centered'));
             card.classList.add('centered');
         }
 

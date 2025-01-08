@@ -8,7 +8,7 @@ import (
 	"strconv"
 )
 
-// Représentation d'une date de concert
+// Representation of a concert date
 type date struct {
 	Id    int      `json:"id"`
 	Dates []string `json:"dates"`
@@ -30,7 +30,7 @@ func Length(url string) int {
 }
 
 func ReadDates(body []byte) date {
-	// Analyser les données JSON dans une variable de type date
+	// Analysis of JSON data in a date variable
 	var data date
 	err := json.Unmarshal(body, &data)
 	if err != nil {
@@ -51,7 +51,7 @@ func OpenDates(id string) date {
 	}
 	defer resp.Body.Close()
 
-	// Vérifier si la requête a réussi (code HTTP 200)
+	// Check if the request was successful (HTTP code 200)
 	if resp.StatusCode != 200 {
 		log.Fatalf("La requête a échoué avec le statut: %d", resp.StatusCode)
 	}
