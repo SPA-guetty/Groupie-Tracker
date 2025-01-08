@@ -111,23 +111,25 @@
                                 <h2 id="artistName">{{.Name}}</h2>
                                 <p id="dateOfCreat">Année de création: {{.CreationDate}}</p>
                             </div>
+                            <p id="firstAlbum"> --> Premier album: {{.FirstAlbum}} <-- </p>
                             <button class="flip-button" onclick="flipAndAnimateCard(this)">View more</button>
                         </div>
                         <div class="card-back">
                             <div class="card-content-back">
-                                <p id="firstAlbum"> ---> Premier album: {{.FirstAlbum}} <--- </p>
                                 <h2 id="members">Membres :</h2>
-                                <ul class="list-members">
+                                <button id="toggle-members-button" onclick="toggleMembersList(this)">Voir les membres</button>
+                                <ul class="members-list" style="display: none;">
                                     {{range .Members}}
                                         <li class="album-member">{{.}}</li>
                                     {{end}}
                                 </ul>
                                 
                                 <h2 id="concerts">Concerts :</h2>
-                                <ul class="concerts-list">
+                                <button id="toggle-date-location-button" onclick="toggleConcertList(this)">Voir les concerts</button>
+                                <ul class="concerts-list" style="display: none;">
                                     <!--Permettra d'avoir la date de concert suivi du lieu du concert sous forme (date : lieu)-->
                                     {{range .ConcertLocations}}
-                                        <li>{{.}}</li>
+                                        <li class="artists-concerts">{{.}}</li>
                                     {{end}}
                                 </ul>
                             </div>
@@ -199,7 +201,6 @@
         function flipAndAnimateInitialCard(button) {
             const currentCard = button.closest('.card');
     
-            // Disparition de la carte
             currentCard.style.transition = 'transform 2s ease-in-out, opacity 2s ease-in-out';
             currentCard.style.transform = 'rotateY(180deg) scale(0.1)';
             currentCard.style.opacity = '1'; // Permet à la carte de disparaître du côté back et non front ce qui aurait été la valeur (0)
@@ -214,6 +215,35 @@
                 currentCard.style.left = '';
             }, 2000);
         }
+
+        // Fonction permettant de vérifier, afficher ou cacher les membres d'un groupe
+        function toggleMembersList(button) {
+            const membersList = button.nextElementSibling;
+            // Vérification si la liste est actuellement visible ou cachée
+            if (membersList.style.display === "none" || membersList.style.display === "") {
+                // Afficher la liste des membres
+                membersList.style.display = "block";
+                button.textContent = "Cacher les membres";
+            } else {
+                // Cacher la liste des membres
+                membersList.style.display = "none";
+                button.textContent = "Voir les membres";
+            }
+        }
+
+        // Fonction permettant de vérifier, afficher ou cacher les dates et lieux des concerts
+        function toggleConcertList(button) {
+            const concertsList = button.nextElementSibling;
+
+            if (concertsList.style.display === "none" || concertsList.style.display === "") {
+                concertsList.style.display = "block";
+                button.textContent = "Cacher les concerts"
+            } else {
+                concertsList.style.display = "none";
+                button.textContent = "Voir les concerts"
+            }
+        }
+
     </script>
 
 </body>

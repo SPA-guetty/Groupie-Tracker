@@ -277,7 +277,7 @@ body {
    position: fixed; /* Changez de 'absolute' à 'fixed' pour centrer dans toute la fenêtre */
    top: 50%;  /* Centrage vertical */
    left: 50%; /* Centrage horizontal */
-   transform: translate(-50%, -50%) scale(2) rotateY(180deg); /* Centrer avec une échelle augmentée */
+   transform: translate(-50%, -50%) scale(2.2) rotateY(180deg); /* Centrer avec une échelle augmentée */
    transform-style: preserve-3d;
    z-index: 1000; /* Assurez-vous que la carte est au-dessus des autres éléments */
    transition: transform 2s ease-in-out, top 2s ease, left 2s ease;
@@ -304,7 +304,7 @@ body {
 }
 
 .card-front {
-    border-radius: 25px;
+    border-radius: 1.55rem;
     background-color: #fff;
     transform: rotateY(0deg);
 }
@@ -324,7 +324,7 @@ body {
 .card .image-content img {
     width: 100%;
     height: auto;
-    border-radius: 8px;
+    border-radius: 0.5rem;
 }
 
 .overlay {
@@ -354,7 +354,7 @@ body {
 
 .image-content {
     position: relative;
-    row-gap: 5px;
+    row-gap: 0.33rem;
     margin: 0 0 -2rem 0;
 }
 
@@ -367,12 +367,12 @@ body {
 
 #artist-image {
     position: relative;
-    height: 150px;
-    width: 150px;
+    height: 9rem;
+    width: 9rem;
     border-radius: 50%;
     background: #fff;
     margin-top: 0.7rem;
-    padding: 3px;
+    padding: 0.25rem;
 }
 
 #artist-image #artist-img {
@@ -380,7 +380,15 @@ body {
     width: 100%;
     object-fit: cover;
     border-radius: 50%;
-    border: 4px solid #4070f4;
+    border: 0.3rem solid #4070f4;
+}
+
+#artistName {
+    font-size: 1.15rem;
+    font-weight: 500;
+    color: #333;
+    margin-top: 0.2rem;
+    z-index: 4;
 }
 
 #dateOfCreat {
@@ -388,6 +396,14 @@ body {
     line-height: 1.95rem;
     color: #707070;
     text-align: center;
+}
+
+#firstAlbum {
+    font-size: 0.93rem;
+    font-weight: 500;
+    color: #6453fa;
+    line-height: 1.15rem;
+    margin-top: -0.5rem;
 }
 
 .flip-button {
@@ -431,6 +447,8 @@ body {
     align-items: center;
     /*padding: 10px;*/
     border-radius: 8px;
+    border: #333 0.2rem ridge;
+    box-shadow: inset 0.3rem 1rem 1rem #474747 ;
     transition: transform 0.6s ease-in-out;
     transform: rotateY(180deg);
     color: rgb(2, 2, 2);
@@ -443,32 +461,23 @@ body {
 }
 
 .card-content-back {
-    /*display: flex;
-    flex-direction: column;*/
-    /*align-items: center;*/
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     margin-top: 5px;
 }
 
-#artistName {
-    font-size: 1.15rem;
-    font-weight: 500;
-    color: #333;
-    z-index: 4;
+#toggle-members-button, #toggle-date-location-button {
+    width: 7.1rem;
+    font-size: 0.5rem;
+    /*margin-left: 26%;*/
 }
 
-#firstAlbum {
-    font-size: 0.7rem;
-    font-weight: 500;
-    color: #6453fa;
-    line-height: 1.15rem;
-    margin-top: -0.5rem;
-}
-
-#members {
+#members, #concerts {
     font-size: 0.8rem;
     font-weight: 600;
     color: #333;
-    margin-left: 1rem;
+    margin-left: 0rem;
     text-decoration: underline black;
     line-height: 1.8rem;
 }
@@ -481,6 +490,11 @@ body {
 .album-member {
     font-size: 0.85rem;
     margin-left: 1rem;
+}
+
+.artists-concerts {
+    font-size: 0.79rem;
+    margin-left: 0.6rem;
 }
 
 /* Transition pour remettre la carte à sa position initiale */

@@ -7,6 +7,7 @@ import (
 	"net/http"
 	"groupie_tracker/concertdates"
 	"strconv"
+	"log"
 )
 
 type location struct {
@@ -38,10 +39,11 @@ func ReadLocation(body []byte) []location {
 		fmt.Println("Error:", err2)
 	}
 	index := api["index"]
-	var art0 location //Creating an empty artist to keep the Id in place
+	var art0 location //Création d'un artiste vide pour garder les Id en place
 	index = append([]location{art0}, index...)
 	return index
 }
+
 
 func OpenAllLocations() []location {
 	url := "https://groupietrackers.herokuapp.com/api/locations"
@@ -56,14 +58,39 @@ func GetConcertDatesAndLocations(artistId int) map[string]string {
 	datesData := concertdates.OpenDates(strconv.Itoa(artistId))
 	locationsData := OpenAllLocations()
 
-	// Allows to find the location according to each concert date for each artist (artistId)
+	// Permet de trouver le lieu en fonction de chaque date de concert pour chaque artiste (artistId)
 	dateLocationMap := make(map[string]string)
 	for i, date := range datesData.Dates {
-		// Association of concert date and venue for each artist
+		// Association de la date de concert avec son lieu pour chaque artistId
 		if i < len(locationsData) && locationsData[i].Id == artistId {
 			dateLocationMap[date] = locationsData[i].Locations[i]
 		}
 	}
 
 	return dateLocationMap
+}
+
+func AssociateConcertsWithLocations() []Artist {
+    // Récupérer les artistes, les lieux et les dates de concerts
+    artists, err := GetArtists()
+    if err != nil {
+        log.Println("Erreur lors de la récupération des artistes:", err)
+        return nil
+    }
+
+    locations := OpenAllLocations()
+    concertDates := concertdates.Get_All_Dates()
+
+    // Associer les dates aux lieux
+    for i := range artists {
+        var concertInfo []string
+        for j := 0; j < len(concertDates); j++ {
+            if len(concertDates[j].Dates) > j && len(locations) > j { // Vérifier les limites
+                // Associer la date de concert au lieu de concert en fonction de leur indice
+                concertInfo = append(concertInfo, fmt.Sprintf("%s : %s", concertDates[j].Dates[j], locations[j].Locations[j]))
+            }
+        }
+        artists[i].ConcertDatesLocations = concertInfo // Sauvegarder les associations
+    }
+    return artists
 }

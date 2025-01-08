@@ -18,7 +18,7 @@ var port = ":8080"
 func main() {
 	// Server routes
 	http.HandleFunc("/", ArtHandler)
-	http.HandleFunc("/artistinfo", ArtGetInfo)
+	/*http.HandleFunc("/artistinfo", ArtGetInfo)*/
 
 	// Static file server for images and css files
 	fileServer := http.FileServer(http.Dir("./assets"))
@@ -29,9 +29,9 @@ func main() {
 }
 
 func ArtHandler(w http.ResponseWriter, req *http.Request) {
+	var err error
 	// Retrieving artist data about and details like dates: locations
 	artists, err := autors.GetConcertDetails()
-	
 	if err != nil {
         log.Println("Erreur lors de la récupération des artistes:", err)
         http.Error(w, "Erreur lors de la récupération des artistes", http.StatusInternalServerError)
@@ -69,6 +69,7 @@ func ArtHandler(w http.ResponseWriter, req *http.Request) {
 	err = tmpl.Execute(w, pageData)
 	if err != nil {
 		http.Error(w, fmt.Sprintf("Erreur lors de l'exécution du template: %v", err), http.StatusInternalServerError)
+		return
 	}
 }
 
@@ -79,7 +80,7 @@ func ArtGetInfo(w http.ResponseWriter, req *http.Request) {
 		return
 	}
 	target := req.FormValue("artist")
-	fmt.Println("ariste = ", target)
+	fmt.Println("artiste = ", target)
 	artists, _ := autors.GetArtists()
 
 	for _, artist := range artists {
