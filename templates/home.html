@@ -122,8 +122,7 @@
                                     </div>
                                     <div class="flex-members">
                                         <h2 id="members">Membres :</h2>
-                                        <button id="toggle-members-button" onclick="toggleMembersList(this)">Voir les membres</button>
-                                        <ul class="members-list" style="display: none;">
+                                        <ul class="members-list">
                                             {{range .Members}}
                                                 <li class="album-member">{{.}}</li>
                                             {{end}}
@@ -131,8 +130,7 @@
                                     </div>
                                 </div>
                                 <h2 id="concerts">Concerts :</h2>
-                                <button id="toggle-date-location-button" onclick="toggleConcertList(this)">Voir les concerts</button>
-                                <ul class="concerts-list" style="display: none;">
+                                <ul class="concerts-list">
                                     <!--Permettra d'avoir la date de concert suivi du lieu du concert sous forme (date : lieu)-->
                                     {{range .ConcertLocations}}
                                         <li class="artists-concerts">{{.}}</li>
@@ -220,34 +218,6 @@
                 currentCard.style.top = '';
                 currentCard.style.left = '';
             }, 2000);
-        }
-
-        // Fonction permettant de vérifier, afficher ou cacher les membres d'un groupe
-        function toggleMembersList(button) {
-            const membersList = button.nextElementSibling;
-            // Vérification si la liste est actuellement visible ou cachée
-            if (membersList.style.display === "none" || membersList.style.display === "") {
-                // Afficher la liste des membres
-                membersList.style.display = "block";
-                button.textContent = "Cacher les membres";
-            } else {
-                // Cacher la liste des membres
-                membersList.style.display = "none";
-                button.textContent = "Voir les membres";
-            }
-        }
-
-        // Fonction permettant de vérifier, afficher ou cacher les dates et lieux des concerts
-        function toggleConcertList(button) {
-            const concertsList = button.nextElementSibling;
-
-            if (concertsList.style.display === "none" || concertsList.style.display === "") {
-                concertsList.style.display = "block";
-                button.textContent = "Cacher les concerts"
-            } else {
-                concertsList.style.display = "none";
-                button.textContent = "Voir les concerts"
-            }
         }
 
     </script>

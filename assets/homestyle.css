@@ -277,7 +277,7 @@ body {
    position: fixed; /* Changez de 'absolute' à 'fixed' pour centrer dans toute la fenêtre */
    top: 50%;  /* Centrage vertical */
    left: 50%; /* Centrage horizontal */
-   transform: translate(-50%, -50%) scale(2.2) rotateY(180deg); /* Centrer avec une échelle augmentée */
+   transform: translate(-50%, -50%) scale(2.05) rotateY(180deg); /* Centrer avec une échelle augmentée */
    transform-style: preserve-3d;
    z-index: 1000; /* Assurez-vous que la carte est au-dessus des autres éléments */
    transition: transform 2s ease-in-out, top 2s ease, left 2s ease;
@@ -507,12 +507,6 @@ body {
     transform: scale(1.081);
 }
 
-#toggle-members-button, #toggle-date-location-button {
-    width: 7.1rem;
-    font-size: 0.5rem;
-    /*margin-left: 26%;*/
-}
-
 #members, #concerts {
     font-size: 0.7rem;
     font-weight: 600;
@@ -527,6 +521,11 @@ body {
 #members {
     margin-top: -0.5rem;
     margin-bottom: 0.09rem;
+}
+
+#concerts {
+    margin-top: 0.3rem;
+    margin-bottom: 0.1rem;
 }
 
 .list-member {
@@ -546,25 +545,24 @@ body {
 
 /* Transition pour remettre la carte à sa position initiale */
 .return-button {
-   width: 6.9rem;
-   height: 2.3rem;
-   margin-bottom: 0.7rem;
-   left: 28%;
-   align-items: center;
-   border: #265df2 double 0.17rem;
-   border-radius: 0.375rem;
-   font-size: 0.7em;
-   color: #fff;
-   background-color: #4070f4;
-   cursor: pointer;
-   transition: all 0.3s ease;
+    width: 5.1rem;
+    height: 1.5rem;
+    margin-bottom: -0.4rem;
+    margin-left: 30%;
+    border: #265df2 double 0.17rem;
+    border-radius: 0.375rem;
+    font-size: 0.7em;
+    color: #fff;
+    background-color: #4070f4;
+    cursor: pointer;
+    transition: all 0.3s ease;
 }
 
 .return-button:hover {
-   background: #265df2;
+    background: #265df2;
 }
 
 .return-button:active {
-   transform:scale(0.9);
-   background: #4070f4;
+    transform:scale(0.9);
+    background: #4070f4;
 }
