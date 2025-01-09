@@ -447,7 +447,7 @@ body {
     align-items: start;
     /*padding: 10px;*/
     border-radius: 0.5rem;
-    border: #333 0.2rem ridge;
+    border: #333 0.3rem ridge;
     box-shadow: inset 0.3rem 1rem 1rem #474747 ;
     transition: transform 0.6s ease-in-out;
     transform: rotateY(180deg);
@@ -481,10 +481,12 @@ body {
 
 #artist-image-back {
     position: relative;
-    height: 6.8rem;
-    width: 6.8rem;
+    height: 5.8rem;
+    width: 5.8rem;
     border-radius: 0.52rem;
     background: #dbd9d9;
+    margin-left: -0.5rem;
+    margin-top: -0.5rem;
     padding: 0.25rem;
 }
 
@@ -494,7 +496,8 @@ body {
     object-fit: cover;
     border-radius: 0.5rem;
     border: 0.2rem solid #4070f4;
-    box-shadow: 0.3rem 0.8rem 1rem 0.2rem #474747;
+    box-shadow: 0.3rem 0.5rem 1rem 0.2rem #474747;
+    
 }
 
 #artist-image-back #artist-img-back:hover {
@@ -524,8 +527,8 @@ body {
 }
 
 #concerts {
-    margin-top: 0.3rem;
-    margin-bottom: 0.1rem;
+    margin-top: -0.3rem;
+    margin-bottom: -0.15rem;
 }
 
 .list-member {
@@ -534,8 +537,8 @@ body {
 }
 
 .album-member {
-    font-size: 0.55rem;
-    margin-left: 0.9rem;
+    font-size: 0.52rem;
+    margin-left: 0.8rem;
 }
 
 .artists-concerts {
