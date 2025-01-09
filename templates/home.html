@@ -116,14 +116,20 @@
                         </div>
                         <div class="card-back">
                             <div class="card-content-back">
-                                <h2 id="members">Membres :</h2>
-                                <button id="toggle-members-button" onclick="toggleMembersList(this)">Voir les membres</button>
-                                <ul class="members-list" style="display: none;">
-                                    {{range .Members}}
-                                        <li class="album-member">{{.}}</li>
-                                    {{end}}
-                                </ul>
-                                
+                                <div class="flex-artist">
+                                    <div id="artist-image-back">
+                                        <img id="artist-img-back" src="{{.Image}}" alt="Image de {{.Name}}"/>
+                                    </div>
+                                    <div class="flex-members">
+                                        <h2 id="members">Membres :</h2>
+                                        <button id="toggle-members-button" onclick="toggleMembersList(this)">Voir les membres</button>
+                                        <ul class="members-list" style="display: none;">
+                                            {{range .Members}}
+                                                <li class="album-member">{{.}}</li>
+                                            {{end}}
+                                        </ul>
+                                    </div>
+                                </div>
                                 <h2 id="concerts">Concerts :</h2>
                                 <button id="toggle-date-location-button" onclick="toggleConcertList(this)">Voir les concerts</button>
                                 <ul class="concerts-list" style="display: none;">
