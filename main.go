@@ -38,6 +38,14 @@ func ArtHandler(w http.ResponseWriter, req *http.Request) {
         return
     }
 
+	// Retrieve the search term
+	searchTerm := req.URL.Query().Get("search")
+
+	// If a search term is provided, filter artists, places and dates
+	if searchTerm != "" {
+		artists = autors.FilterArtistsBySearch(artists, searchTerm)
+	}
+
 	// Checking sorting parameters
 	categorie := req.URL.Query().Get("categorie")
 	if categorie == "reverseSens" {

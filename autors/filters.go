@@ -3,6 +3,7 @@ package autors
 import (
 	"groupie_tracker/concertdates"
 	"strconv"
+	"strings"
 )
 
 func Filter_By_Name(tab []Artist) []Artist {
@@ -137,4 +138,25 @@ func Get_Between_Dates(targetmin string, targetmax string, tab []Artist) []Artis
 		}
 	}
 	return newtab
+}
+
+func FilterArtistsBySearch(artists []Artist, searchTerm string) []Artist {
+	var filteredArtists []Artist
+	searchTerm = strings.ToLower(searchTerm)
+
+	for _, artist := range artists {
+		if strings.Contains(strings.ToLower(artist.Name), searchTerm) {
+			filteredArtists = append(filteredArtists, artist)
+			continue
+		}
+
+		for _, location := range artist.ConcertLocations {
+			if strings.Contains(strings.ToLower(location), searchTerm) {
+				filteredArtists = append(filteredArtists, artist)
+				break
+			}
+		}
+	}
+
+	return filteredArtists
 }

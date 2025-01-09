@@ -17,7 +17,24 @@
             <div class="message">
                 <p id="explication">**Choisissez votre groupe préféré ou recherchez grâce aux différents filtres**</p>
             </div>
-        
+
+            <!-- Barre de recherche -->
+            <section id="search-bar">
+                <h2>Rechercher un artiste, une ville, un pays, ou une date de concert</h2>
+                <form action="/" method="GET">
+                    <input type="text" name="search" id="search-bar" placeholder="Recherche..." required/>
+                    <button type="submit">Rechercher</button>
+                    {{if .Artists}}
+                    
+                        {{range .Artists}}
+
+                        {{else}}
+                            <p>Aucun artiste trouvé pour votre recherche.</p>
+                        {{end}}
+                    {{end}}
+                </form>
+            </section>
+                    
             <section id="filter">
                 <h2 id="filters">Filtres</h2>
                 <form class="form-filterHome-alphabet" action="/" method="GET">
