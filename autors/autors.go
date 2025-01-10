@@ -113,9 +113,8 @@ func GetConcertDetails() ([]Artist, error) {
 		// Creation of a table for the storage of results in the form "date: location"
 		var concertDetails []string
 		for j := 0; j < len(artistDates) && j < len(artistLocations); j++ {
-			concertDetails = append(concertDetails, fmt.Sprintf("%s : %s", artistDates[j], artistLocations[j]))
+			concertDetails = append(concertDetails, artistDates[j] + " : " + artistLocations[j])
 		}
-
 		artists[i].ConcertDates = artistDates
 		artists[i].ConcertLocations = concertDetails
 	}

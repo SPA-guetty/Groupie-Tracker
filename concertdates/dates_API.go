@@ -36,6 +36,11 @@ func ReadDates(body []byte) date {
 	if err != nil {
 		log.Fatalf("Erreur lors de l'analyse du JSON: %v", err)
 	}
+	for index, date := range data.Dates {
+		if string(date[0]) == "*" {
+			data.Dates[index] = date[1:]
+		}
+	}
 	return data
 }
 
