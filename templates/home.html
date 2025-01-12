@@ -18,14 +18,16 @@
                 <p id="explication">**Choisissez votre groupe préféré ou recherchez grâce aux différents filtres**</p>
             </div>
 
+            <div class="espace-bar"></div>
+            
             <!-- Barre de recherche -->
-            <section id="search-bar">
-                <h2>Rechercher un artiste, une ville, un pays, ou une date de concert</h2>
+            <section id="search-argument">
+                <h2 class="search-title">Rechercher un artiste, une ville, un pays, ou une date de concert</h2>
                 <form action="/" method="GET">
                     <input type="text" name="search" id="search-bar" placeholder="Recherche..." required/>
-                    <button type="submit">Rechercher</button>
+                    <button type="submit" id="search-submit">Rechercher</button>
                     {{if .Artists}}
-                    
+
                         {{range .Artists}}
 
                         {{else}}
@@ -40,14 +42,14 @@
                 <form class="form-filterHome-alphabet" action="/" method="GET">
                     <!-- Champ de sélection pour les catégories -->
                     <fieldset id="read-section">
-                        <legend>Ordre Alphabétique</legend>
+                        <legend class="filter-title">Ordre Alphabétique</legend>
                         <label for="categorie">Ordre de lecture :</label>
                         <select id="categorie" name="categorie">
                             <option value="normalSens">A-Z</option>
                             <option value="reverseSens">Z-A</option>
                         </select><br><br>
                         <div class="submit-filter">
-                            <input id="button-submit-filter-alphabet" type="submit" value="Envoyer">
+                            <input id="button-submit-filter-alphabet" type="submit" value="Obtenir">
                         </div>
                     </fieldset>
                 </form>
@@ -55,7 +57,7 @@
                 <form class="form-filterHome-concert" action="/" method="GET">
                     <!-- Champ de sélection pour les dates -->
                     <fieldset id="concert-section">
-                        <legend>Filtre par Date de Concert</legend>
+                        <legend class="filter-title">Filtre par Date de Concert</legend>
                         <label for="concert-date">Entrez la date d'un concert :</label>
                         <input type="date" name="concert-date" id="concert-date"><br>
                         <div class="submit-filter">
@@ -64,11 +66,11 @@
                         <table id="table-choiceBetweenTwoDates">
                             <tbody>
                                 <tr>
-                                    <td>
+                                    <td id="td-1-DateResearch">
                                         <label class="label-searchDate" for="research-startDate">Date de début :</label>
                                         <input type="date" name="research-startDate" id="research-startDate" required>
                                     </td>
-                                    <td id="td-2-DateResearch">
+                                    <td id="td-DateResearch">
                                         <label class="label-searchDate" for="research-endDate">Date de fin :</label>
                                         <input type="date" name="research-endDate" id="research-endDate" required><br>
                                     </td>
@@ -84,7 +86,7 @@
                     <!-- Case à cocher pour activer des filtres par date -->
                 <form class="form-filterHome-creation" action="/" method="GET">
                     <fieldset id="creation-section">
-                        <legend>Filtres par Dates de création du groupe</legend>
+                        <legend class="filter-title">Filtres par Dates de création du groupe</legend>
                         <label for="categorie2">Ordre de création :</label>
                         <select id="categorie2" name="categorie2">
                             <option value="normalCreation">Croissant🥐</option>
@@ -128,7 +130,7 @@
                                 <h2 id="artistName">{{.Name}}</h2>
                                 <p id="dateOfCreat">Année de création: {{.CreationDate}}</p>
                             </div>
-                            <p id="firstAlbum"> --> Premier album: {{.FirstAlbum}} <-- </p>
+                            <p id="firstAlbum"> -> Premier album: {{.FirstAlbum}} <- </p>
                             <button class="flip-button" onclick="flipAndAnimateCard(this)">View more</button>
                         </div>
                         <div class="card-back">
