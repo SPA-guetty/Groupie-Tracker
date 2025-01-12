@@ -31,6 +31,36 @@ func Length(url string) int {
 	return nb
 }
 
+func CleanLocations(tab []location) []location {
+	for index, locations := range tab {
+		var newtab []string
+		for _, location := range locations.Locations {
+			upper := true
+			newlocation := ""
+			for _, run := range location {
+				if run == '_' {
+					newlocation += " "
+					upper = true
+				} else if run == '-' {
+					newlocation += " ("
+					upper = true
+				} else {
+					if upper {
+						newlocation += string(byte(run)-32)
+						upper = false
+					} else {
+						newlocation += string(run)
+					}
+				}
+			}
+			newlocation += ")"
+			newtab = append(newtab, newlocation)
+		}
+		tab[index].Locations = newtab
+	}
+	return tab
+}
+
 func ReadLocation(body []byte) []location {
 	var api map[string][]location
 
@@ -41,6 +71,7 @@ func ReadLocation(body []byte) []location {
 	index := api["index"]
 	var art0 location //Création d'un artiste vide pour garder les Id en place
 	index = append([]location{art0}, index...)
+	index = CleanLocations(index)
 	return index
 }
 
@@ -66,7 +97,7 @@ func GetConcertDatesAndLocations(artistId int) map[string]string {
 			dateLocationMap[date] = locationsData[i].Locations[i]
 		}
 	}
-
+	fmt.Println(dateLocationMap)
 	return dateLocationMap
 }
 
