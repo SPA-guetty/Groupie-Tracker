@@ -38,6 +38,18 @@ func ArtHandler(w http.ResponseWriter, req *http.Request) {
         return
     }
 
+	// Retrieving selected creation dates
+    before1980 := req.URL.Query().Get("before-1980") != ""
+    date1980to1990 := req.URL.Query().Get("1980-1990") != ""
+    date1990to2000 := req.URL.Query().Get("1990-2000") != ""
+    date2000to2010 := req.URL.Query().Get("2000-2010") != ""
+    after2010 := req.URL.Query().Get("after 2010") != ""
+
+    // Applying the filters
+    if before1980 || date1980to1990 || date1990to2000 || date2000to2010 || after2010 {
+        artists = autors.FilterArtistsByCreationDates(artists, before1980, date1980to1990, date1990to2000, date2000to2010, after2010)
+    }
+
 	// Retrieve the search term
 	searchTerm := req.URL.Query().Get("search")
 

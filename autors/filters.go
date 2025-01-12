@@ -160,3 +160,22 @@ func FilterArtistsBySearch(artists []Artist, searchTerm string) []Artist {
 
 	return filteredArtists
 }
+
+func FilterArtistsByCreationDates(artists []Artist, before1980, date1980to1990, date1990to2000, date2000to2010, after2010 bool) []Artist {
+    var filteredArtists []Artist
+
+    for _, artist := range artists {
+        creationDate := artist.CreationDate
+
+        // Apply the creation dates filter
+        if (before1980 && creationDate <= 1980) ||
+           (date1980to1990 && creationDate >= 1980 && creationDate <= 1990) ||
+           (date1990to2000 && creationDate >= 1990 && creationDate <= 2000) ||
+           (date2000to2010 && creationDate >= 2000 && creationDate <= 2010) ||
+           (after2010 && creationDate > 2010) {
+            filteredArtists = append(filteredArtists, artist)
+        }
+    }
+
+    return filteredArtists
+}
