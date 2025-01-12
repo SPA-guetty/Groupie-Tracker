@@ -6,6 +6,7 @@ import (
 	"log"
 	"net/http"
 	"strconv"
+	"fmt"
 )
 
 // Representation of a concert date
@@ -49,10 +50,12 @@ func ReadDates(body []byte) date {
 		}
 		data.Dates[index] = cleandate
 	}
+	fmt.Println(data, "COUCOU")
 	return data
 }
 
 func OpenDates(id string) date {
+	fmt.Println("hi")
 	urlint, _ := strconv.Atoi(id)
 	if urlint < 1 || urlint > Length("https://groupietrackers.herokuapp.com/api/dates") {
 		log.Fatal("Error: dates index is out of range")
@@ -75,12 +78,53 @@ func OpenDates(id string) date {
 	}
 	return ReadDates(body)
 }
-
-func Get_All_Dates() []date {
+/*
+func Get_All_Dates2() []date {
 	var tab []date
 	for i := 1; i <= Length("https://groupietrackers.herokuapp.com/api/dates"); i++ {
 		val := strconv.Itoa(i)
-		tab = append(tab, OpenDates(val))
+		tab = append(tab, OpenDates2(val))
 	}
 	return tab
+}*/
+
+func Clean_Date(api []date) []date {
+	for indexapi, dateindex := range api {
+		for indexdate, date := range dateindex.Dates {
+			cleandate := ""
+			for _, run := range date {
+				if string(run) != "*" {
+					if string(run) == "-" {
+						cleandate += " "
+					} else {
+						cleandate += string(run)
+					}
+				}
+			}
+			api[indexapi].Dates[indexdate] = cleandate
+		}
+	}
+	return api
+}
+
+func Open_All_Dates(body []byte) []date {
+	var api map[string][]date
+	err := json.Unmarshal([]byte(body), &api)
+	if err != nil {
+		fmt.Println("Error:", err)
+	}
+	index := api["index"]
+	index = Clean_Date(index)
+	var date0 date //Date vide pour régler l'API et garder les id
+	index = append([]date{date0}, index...)
+	return index
+}
+
+func Get_All_Dates() []date {
+	url := "https://groupietrackers.herokuapp.com/api/dates"
+	req, _ := http.NewRequest("GET", url, nil)
+	res, _ := http.DefaultClient.Do(req)
+	defer res.Body.Close()
+	body, _ := io.ReadAll(res.Body)
+	return Open_All_Dates(body)
 }
