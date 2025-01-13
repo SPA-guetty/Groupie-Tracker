@@ -19,7 +19,7 @@ func main() {
 	// Server routes
 	http.HandleFunc("/", ArtHandler)
 	/*http.HandleFunc("/artistinfo", ArtGetInfo)*/
-
+	
 	// Static file server for images and css files
 	fileServer := http.FileServer(http.Dir("./assets"))
 	http.Handle("/static/", http.StripPrefix("/static/", fileServer))
@@ -69,16 +69,16 @@ func ArtHandler(w http.ResponseWriter, req *http.Request) {
 	categorie2 := req.URL.Query().Get("categorie2")
     if categorie2 == "reverseCreation" {
         artists = autors.Filter_By_Creation_Reversed(artists)
-    } else {
+    } else if categorie2 == "normalCreation" {
         artists = autors.Filter_By_Creation(artists)
     }
-
+	
 	// Data for the template
 	pageData := PageData{
 		TitleGroup: "Groupie Trackers",
 		Artists:    artists,
 	}
-
+	
 	// Load and run the HTML template
 	tmpl, err := template.New("home").ParseFiles("templates/home.html")
 	if err != nil {

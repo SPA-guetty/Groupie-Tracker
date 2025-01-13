@@ -58,7 +58,7 @@ func Filter_By_Creation(tab []Artist) []Artist {
 				}
 			}
 		}
-		tabart = Filter_By_Name(tabart)
+		
 		for i := range tabart {
 			new_tab = append(new_tab, tabart[i])
 			tab = append(tab[:(tabint[i]-i)], tab[(tabint[i]-i+1):]...)
@@ -86,7 +86,6 @@ func Filter_By_Creation_Reversed(tab []Artist) []Artist {
                 }
             }
         }
-        tabart = Filter_By_Name_Reversed(tabart)
         for i := range tabart {
             new_tab = append(new_tab, tabart[i])
             tab = append(tab[:(tabint[i]-i)], tab[(tabint[i]-i+1):]...)
