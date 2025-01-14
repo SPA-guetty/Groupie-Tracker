@@ -1,6 +1,6 @@
 package autors
 
-import "fmt"
+//import "fmt"
 
 type country struct {
 	Country		string
@@ -110,11 +110,11 @@ func Filter_By_Alp(tab []country) []country {
 func Find_Locations() {
 	world := Get_All_Locations()
 	world = Filter_By_Alp(world)/*
-	countries = Filter_By_Alp(countries)*/
+	countries = Filter_By_Alp(countries)
 	for _, e := range world {
 		fmt.Println(e)
 	}
-	/*for _, e := range countries {
+	for _, e := range countries {
 		fmt.Println(e)
 	}
 	fmt.Println("Nombre de villes:", len(cities))

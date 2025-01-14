@@ -110,9 +110,20 @@
                         </div>
                     </fieldset>
                 </form>
+
+                <form class="artist-length" action="/" method="GET">
+                    <label for="nombre">Nombre d'artistes à afficher :</label>
+                    <select id="nombre" name="nombre">
+                        {{range .Long}}
+                            <option value="nb">{{.}}</option>
+                        {{end}}
+                    </select>
+                    <div class="submit-filter">
+                        <input id="button-artist-length" type="submit" value="Obtenir">
+                    </div>
+                </form>
             </section>
         </header>
-    
         <nav class="card-container">
             <div class="artist-list">
                 {{range .Artists}}

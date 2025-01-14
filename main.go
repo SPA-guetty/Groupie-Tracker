@@ -9,8 +9,9 @@ import (
 )
 
 type PageData struct {
-	TitleGroup string
-	Artists    []autors.Artist
+	TitleGroup	string
+	Artists    	[]autors.Artist
+	Long		[]int
 }
 
 var port = ":8080"
@@ -39,6 +40,11 @@ func ArtHandler(w http.ResponseWriter, req *http.Request) {
         return
     }
 
+	var long []int
+	for i := 1; i <= len(artists); i++ {
+		long = append(long, i)
+	}
+	
 	// Retrieving selected creation dates
     before1980 := req.URL.Query().Get("before-1980") != ""
     date1980to1990 := req.URL.Query().Get("1980-1990") != ""
@@ -78,6 +84,7 @@ func ArtHandler(w http.ResponseWriter, req *http.Request) {
 	pageData := PageData{
 		TitleGroup: "Groupie Trackers",
 		Artists:    artists,
+		Long:		long,
 	}
 	
 	// Load and run the HTML template
@@ -86,7 +93,6 @@ func ArtHandler(w http.ResponseWriter, req *http.Request) {
 		http.Error(w, fmt.Sprintf("Erreur lors du chargement du template: %v", err), http.StatusInternalServerError)
 		return
 	}
-
 	err = tmpl.Execute(w, pageData)
 	if err != nil {
 		http.Error(w, fmt.Sprintf("Erreur lors de l'exécution du template: %v", err), http.StatusInternalServerError)
