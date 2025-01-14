@@ -7,6 +7,7 @@ import (
 	"io"
 	"log"
 	"net/http"
+	"time"
 )
 
 type Artist struct {
@@ -120,4 +121,33 @@ func GetConcertDetails() ([]Artist, error) {
 	}
 
 	return artists, nil
+}
+
+// Function to filter artists according to date range
+func FilterArtistsByConcertDateRange(artists []Artist, startDate, endDate time.Time) []Artist {
+    var filteredArtists []Artist
+
+    // For each artist, check if at least one of their concert dates is in the meantime
+    for _, artist := range artists {
+        var hasConcertInRange bool
+        for _, concertDateStr := range artist.ConcertDates {
+            // Convertir the concert date in type : time.Time
+            concertDate, err := time.Parse("02 01 2006", concertDateStr)
+            if err != nil {
+                log.Printf("Erreur lors de la conversion de la date du concert: %v", err)
+                continue
+            }
+
+            if concertDate.After(startDate) && concertDate.Before(endDate) {
+                hasConcertInRange = true
+                break
+            }
+        }
+
+        if hasConcertInRange {
+            filteredArtists = append(filteredArtists, artist)
+        }
+    }
+
+    return filteredArtists
 }

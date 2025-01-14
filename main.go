@@ -6,6 +6,7 @@ import (
 	"html/template"
 	"log"
 	"net/http"
+	"time"
 )
 
 type PageData struct {
@@ -40,6 +41,27 @@ func ArtHandler(w http.ResponseWriter, req *http.Request) {
         return
     }
 
+	// Retrieve the start and end dates chosen by the user
+    startDateStr := req.URL.Query().Get("research-startDate")
+    endDateStr := req.URL.Query().Get("research-endDate")
+
+    if startDateStr != "" && endDateStr != "" {
+        startDate, err := time.Parse("2006-01-02", startDateStr)
+        if err != nil {
+            http.Error(w, "Date de début invalide", http.StatusBadRequest)
+            return
+        }
+
+        endDate, err := time.Parse("2006-01-02", endDateStr)
+        if err != nil {
+            http.Error(w, "Date de fin invalide", http.StatusBadRequest)
+            return
+        }
+
+        // Filter artists by concert dates
+        artists = autors.FilterArtistsByConcertDateRange(artists, startDate, endDate)
+    }
+	
 	var long []int
 	for i := 1; i <= len(artists); i++ {
 		long = append(long, i)
