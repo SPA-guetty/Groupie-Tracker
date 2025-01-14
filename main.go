@@ -29,6 +29,7 @@ func main() {
 }
 
 func ArtHandler(w http.ResponseWriter, req *http.Request) {
+	autors.Find_Locations()
 	var err error
 	// Retrieving artist data about and details like dates: locations
 	artists, err := autors.GetConcertDetails()
@@ -46,7 +47,7 @@ func ArtHandler(w http.ResponseWriter, req *http.Request) {
     after2010 := req.URL.Query().Get("after 2010") != ""
 
     // Applying the filters
-    if before1980 || date1980to1990 || date1990to2000 || date2000to2010 || after2010 {
+    if (before1980 || date1980to1990 || date1990to2000 || date2000to2010 || after2010) {
         artists = autors.FilterArtistsByCreationDates(artists, before1980, date1980to1990, date1990to2000, date2000to2010, after2010)
     }
 
