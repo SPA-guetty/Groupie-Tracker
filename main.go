@@ -7,6 +7,7 @@ import (
 	"log"
 	"net/http"
 	"time"
+	"strconv"
 )
 
 type PageData struct {
@@ -61,7 +62,19 @@ func ArtHandler(w http.ResponseWriter, req *http.Request) {
         // Filter artists by concert dates
         artists = autors.FilterArtistsByConcertDateRange(artists, startDate, endDate)
     }
+
+	// Récupérer la sélection du nombre d'artistes
+	numArtistsStr := req.URL.Query().Get("nombre")
+	numArtists, err := strconv.Atoi(numArtistsStr)
+	if err != nil || numArtists <= 0 {
+		numArtists = len(artists) // Si pas de sélection valide, afficher tous les artistes
+	}
 	
+	// Limiter la liste des artistes selon la sélection
+	if numArtists < len(artists) {
+		artists = artists[:numArtists]
+	}
+
 	var long []int
 	for i := 1; i <= len(artists); i++ {
 		long = append(long, i)
