@@ -16,6 +16,12 @@ body {
     background-color: #efefef;
 }
 
+header {
+    height: 120%;
+    background: url(image/microphone-retro-fond-musique_98292-3842.jpg) fixed no-repeat top !important ;
+    z-index: 1;
+}
+
 /* Mise en forme concernant le titre et le sous-titre */
 #groupTitlePage {
     font-size: 2.5rem;
