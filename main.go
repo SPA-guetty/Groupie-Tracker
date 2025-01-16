@@ -47,6 +47,8 @@ func ArtHandler(w http.ResponseWriter, req *http.Request) {
 		long = append(long, i)
 	}
 
+	artists = autors.Filter_By_Name(artists)
+
 	// Retrieve the start and end dates chosen by the user
     startDateStr := req.URL.Query().Get("research-startDate")
     endDateStr := req.URL.Query().Get("research-endDate")
@@ -68,14 +70,13 @@ func ArtHandler(w http.ResponseWriter, req *http.Request) {
         artists = autors.FilterArtistsByConcertDateRange(artists, startDate, endDate)
     }
 
-	// Récupérer la sélection du nombre d'artistes
+	// Retrieve the selection of number of artists
 	numArtistsStr := req.URL.Query().Get("nombre")
 	numArtists, err := strconv.Atoi(numArtistsStr)
 	if err != nil || numArtists <= 0 {
 		numArtists = len(artists) // Si pas de sélection valide, afficher tous les artistes
 	}
 	
-	// Limiter la liste des artistes selon la sélection
 	if numArtists < len(artists) {
 		artists = artists[:numArtists]
 	}
