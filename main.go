@@ -42,6 +42,11 @@ func ArtHandler(w http.ResponseWriter, req *http.Request) {
         return
     }
 
+	var long []int
+	for i := 1; i <= len(artists); i++ {
+		long = append(long, i)
+	}
+
 	// Retrieve the start and end dates chosen by the user
     startDateStr := req.URL.Query().Get("research-startDate")
     endDateStr := req.URL.Query().Get("research-endDate")
@@ -73,11 +78,6 @@ func ArtHandler(w http.ResponseWriter, req *http.Request) {
 	// Limiter la liste des artistes selon la sélection
 	if numArtists < len(artists) {
 		artists = artists[:numArtists]
-	}
-
-	var long []int
-	for i := 1; i <= len(artists); i++ {
-		long = append(long, i)
 	}
 	
 	// Retrieving selected creation dates
