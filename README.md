@@ -19,7 +19,7 @@ Le but du projet est de créer un site web regroupant les données de plusieurs 
   - Pour une meilleure visibilité s'il y a trop d'artistes à l'écran
  
 - Des cartes pour chaque artiste !
-    - Chaque carte contient l'image du groupe, son nom, sa date de création ey de son premier album
+    - Chaque carte contient l'image du groupe, son nom, sa date de création et de son premier album
     - Cliquez dessus pour la retourner et l'agrandir ! Vous verrez ainsi les membres du groupe ainsi que ses dates et lieux de concerts !
 
 # L'activation du site web
@@ -31,7 +31,7 @@ Le but du projet est de créer un site web regroupant les données de plusieurs 
 - Étape n°2: Exécuter le code suivant dans le terminal:
     go run main.go
 
-- Étape n°3: Ouvrez votre navigateur préféré et dans la barre de recherche contenant l'URL, tapez:
+- Étape n°3: Ouvrir votre navigateur préféré et dans la barre de recherche contenant l'URL, tapez:
     localhost:8080
 
 # Développeurs du site
