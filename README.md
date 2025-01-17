@@ -1,6 +1,6 @@
 # Groupie-Tracker
 Le projet Groupie-Tracker consiste à ouvrir et lire une API, afin d'en récupérer ses informations.
-Le but du projet est de créer un site web regroupant les données d'une API donnée, afin de les rendre plus facile à lire et pour y faire des recherches.
+Le but du projet est de créer un site web regroupant les données de plusieurs API données, afin de les rendre plus facile à lire et y faire différentes recherches.
 
 # Le site web
 - Tout d'abord, une barre de recherche pour rechercher:
