@@ -73,7 +73,7 @@ func ArtHandler(w http.ResponseWriter, req *http.Request) {
 	// Retrieve the selection of number of artists
 	numArtistsStr := req.URL.Query().Get("nombre")
 	numArtists, err := strconv.Atoi(numArtistsStr)
-	if err != nil || numArtists <= 0 {
+	if err != nil || numArtists <= 0 || numArtists == 52 {
 		numArtists = len(artists) // Si pas de sélection valide, afficher tous les artistes
 		long = long[:51]
 		longbis := []int{52}
