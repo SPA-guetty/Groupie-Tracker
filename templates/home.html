@@ -9,7 +9,7 @@
 </head>
 
 <body>
-    <main class="container">
+    <main class="container" >
         <header>
 
             <h1 id="groupTitlePage">{{.TitleGroup}}</h1>
@@ -39,29 +39,31 @@
                     
             <section id="filter">
                 <h2 id="filters">Filtres</h2>
-                <form class="form-filterHome-alphabet" action="/" method="GET">
+                <form class="form-filterHome-alphabet" action="/" method="POST">
                     <!-- Champ de sélection pour les catégories -->
                     <fieldset id="read-section">
                         <legend class="filter-title">Ordre Alphabétique</legend>
                         <label for="categorie">Ordre de lecture :</label>
                         <select id="categorie" name="categorie">
-                            <option value="normalSens">A-Z</option>
-                            <option value="reverseSens">Z-A</option>
+                            {{if .Categorie}}   
+                                <option value="normalSens">A-Z</option>
+                                <option value="reverseSens">Z-A</option>      
+                            {{else}} 
+                                <option value="reverseSens">Z-A</option>
+                                <option value="normalSens">A-Z</option>
+                            {{end}}  
                         </select><br><br>
                         <div class="submit-filter">
                             <input id="button-submit-filter-alphabet" type="submit" value="Obtenir">
                         </div>
                     </fieldset>
-                </form>
-                
-                <form class="form-filterHome-concert" action="/" method="GET">
-                    <!-- Champ de sélection pour les dates -->
+
                     <fieldset id="concert-section">
                         <legend class="filter-title">Filtre par Date de Concert</legend>
                         <label for="research-startDate">Date de début :</label>
-                        <input type="date" name="research-startDate" id="research-startDate" required><br>
+                        <input type="date" name="research-startDate" id="research-startDate"><br>
                         <label for="research-endDate">Date de fin :</label>
-                        <input type="date" name="research-endDate" id="research-endDate" required><br>
+                        <input type="date" name="research-endDate" id="research-endDate"><br>
                         <div class="submit-filter">
                             <input id="button-submit-filter-dates" type="submit" value="Obtenir">
                         </div>
@@ -73,16 +75,26 @@
                             <p>Aucun artiste n'a de dates de concerts dans l'intervalle de dates choisi.</p>
                         {{end}}
                     </fieldset>
-                </form>
-                    
-                    <!-- Case à cocher pour activer des filtres par date -->
-                <form class="form-filterHome-creation" action="/" method="GET">
+
                     <fieldset id="creation-section">
                         <legend class="filter-title">Filtres par Dates de création du groupe</legend>
                         <label for="categorie2">Ordre de création :</label>
                         <select id="categorie2" name="categorie2">
-                            <option value="normalCreation">Croissant🥐</option>
-                            <option value="reverseCreation">Décroissant</option>
+                            {{if not .Croissant}}
+                                {{if .Categorie2}} 
+                                    <option value="normalCreation">Croissant🥐</option>
+                                    <option value="reverseCreation">Décroissant</option>
+                                    <option value="forgetCreation">Désactiver</option>
+                                {{else}}
+                                    <option value="reverseCreation">Décroissant</option>
+                                    <option value="normalCreation">Croissant🥐</option>
+                                    <option value="forgetCreation">Désactiver</option>
+                                {{end}}
+                            {{else}}
+                                <option value="forgetCreation">Désactivé</option>
+                                <option value="normalCreation">Croissant🥐</option>
+                                <option value="reverseCreation">Décroissant</option>
+                            {{end}}
                         </select><br>
                         <div class="submit-filter">
                             <input id="button-submit-filter-sens-creation" type="submit" value="Obtenir">
@@ -101,9 +113,7 @@
                             <input id="button-submit-filter-creation" type="submit" value="Obtenir">
                         </div>
                     </fieldset>
-                </form>
 
-                <form class="artist-length" action="/" method="GET">
                     <label for="nombre">Nombre d'artistes à afficher :</label>
                     <select id="nombre" name="nombre">
                         {{range .Long}}

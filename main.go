@@ -14,6 +14,11 @@ type PageData struct {
 	TitleGroup	string
 	Artists    	[]autors.Artist
 	Long		[]int
+	Categorie	bool
+	Categorie2	bool
+	Croissant 	bool
+	StartDate	string
+	EndDate		string
 }
 
 var port = ":8080"
@@ -31,7 +36,17 @@ func main() {
 	log.Fatal(http.ListenAndServe(port, nil))
 }
 
+func FindMethod(w http.ResponseWriter, req *http.Request, met string) string {
+	if req.Method == "POST" {
+		Answer := req.FormValue(met)
+		fmt.Println("categorie:",Answer)
+		return Answer
+	}
+	return ""
+}
+
 func ArtHandler(w http.ResponseWriter, req *http.Request) {
+	fmt.Println(req.Method)
 	autors.Find_Locations()
 	var err error
 	// Retrieving artist data about and details like dates: locations
@@ -41,7 +56,7 @@ func ArtHandler(w http.ResponseWriter, req *http.Request) {
         http.Error(w, "Erreur lors de la récupération des artistes", http.StatusInternalServerError)
         return
     }
-
+	
 	var long []int
 	for i := 1; i <= len(artists); i++ {
 		long = append(long, i)
@@ -71,21 +86,7 @@ func ArtHandler(w http.ResponseWriter, req *http.Request) {
     }
 
 	// Retrieve the selection of number of artists
-	numArtistsStr := req.URL.Query().Get("nombre")
-	numArtists, err := strconv.Atoi(numArtistsStr)
-	if err != nil || numArtists <= 0 || numArtists == 52 {
-		numArtists = len(artists) // Si pas de sélection valide, afficher tous les artistes
-		long = long[:51]
-		longbis := []int{52}
-		long = append(longbis, long...)
-	}
-	fmt.Println(numArtistsStr)
-	if numArtists < len(artists) {
-		artists = artists[:numArtists]
-		long = append(long[:numArtists-1], long[numArtists:]...)
-		longbis := []int{numArtists}
-		long = append(longbis, long...)
-	}
+	numArtistsStr := FindMethod(w, req, "nombre")
 	
 	// Retrieving selected creation dates
     before1980 := req.URL.Query().Get("before-1980") != ""
@@ -108,27 +109,46 @@ func ArtHandler(w http.ResponseWriter, req *http.Request) {
 	}
 
 	// Checking sorting parameters
-	categorie := req.URL.Query().Get("categorie")
+	categorie := FindMethod(w, req, "categorie")
 	if categorie == "reverseSens" {
 		artists = autors.Filter_By_Name_Reversed(artists)
 	} else {
 		artists = autors.Filter_By_Name(artists)
 	}
 
-	categorie2 := req.URL.Query().Get("categorie2")
+	categorie2 := FindMethod(w, req, "categorie2")
     if categorie2 == "reverseCreation" {
         artists = autors.Filter_By_Creation_Reversed(artists)
     } else if categorie2 == "normalCreation" {
         artists = autors.Filter_By_Creation(artists)
     }
 	
+	//Show only the asked number of artists
+	numArtists, err := strconv.Atoi(numArtistsStr)
+	if err != nil || numArtists <= 0 || numArtists == 52 {
+		numArtists = len(artists) // Si pas de sélection valide, afficher tous les artistes
+		long = long[:51]
+		longbis := []int{52}
+		long = append(longbis, long...)
+	}
+	
+	if numArtists < len(artists) {
+		artists = artists[:numArtists]
+		long = append(long[:numArtists-1], long[numArtists:]...)
+		longbis := []int{numArtists}
+		long = append(longbis, long...)
+	}
+
 	// Data for the template
 	pageData := PageData{
 		TitleGroup: "Groupie Trackers",
 		Artists:    artists,
 		Long:		long,
+		Categorie:	(categorie != "reverseSens"),
+		Categorie2:	(categorie2 != "reverseCreation"),
+		Croissant: 	(categorie2 == "forgetCreation"),
 	}
-	
+	fmt.Println(pageData.Categorie, categorie)
 	// Load and run the HTML template
 	tmpl, err := template.New("home").ParseFiles("templates/home.html")
 	if err != nil {
