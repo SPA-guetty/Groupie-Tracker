@@ -75,10 +75,16 @@ func ArtHandler(w http.ResponseWriter, req *http.Request) {
 	numArtists, err := strconv.Atoi(numArtistsStr)
 	if err != nil || numArtists <= 0 {
 		numArtists = len(artists) // Si pas de sélection valide, afficher tous les artistes
+		long = long[:51]
+		longbis := []int{52}
+		long = append(longbis, long...)
 	}
-	
+	fmt.Println(numArtistsStr)
 	if numArtists < len(artists) {
 		artists = artists[:numArtists]
+		long = append(long[:numArtists-1], long[numArtists:]...)
+		longbis := []int{numArtists}
+		long = append(longbis, long...)
 	}
 	
 	// Retrieving selected creation dates
