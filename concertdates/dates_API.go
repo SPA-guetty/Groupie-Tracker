@@ -78,15 +78,6 @@ func OpenDates(id string) date {
 	}
 	return ReadDates(body)
 }
-/*
-func Get_All_Dates2() []date {
-	var tab []date
-	for i := 1; i <= Length("https://groupietrackers.herokuapp.com/api/dates"); i++ {
-		val := strconv.Itoa(i)
-		tab = append(tab, OpenDates2(val))
-	}
-	return tab
-}*/
 
 func Clean_Date(api []date) []date {
 	for indexapi, dateindex := range api {

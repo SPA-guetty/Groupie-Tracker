@@ -149,6 +149,13 @@ func FilterArtistsBySearch(artists []Artist, searchTerm string) []Artist {
 			continue
 		}
 
+		for _, members := range artist.Members {
+			if strings.Contains(strings.ToLower(members), searchTerm) {
+				filteredArtists = append(filteredArtists, artist)
+				break
+			}
+		}
+
 		for _, location := range artist.ConcertLocations {
 			if strings.Contains(strings.ToLower(location), searchTerm) {
 				filteredArtists = append(filteredArtists, artist)
