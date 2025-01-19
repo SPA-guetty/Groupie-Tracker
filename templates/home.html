@@ -24,7 +24,11 @@
                 <form class="form-filterHome-alphabet" action="/" method="POST">
                     <!-- Barre de recherche -->
                     <h2 class="search-title">Rechercher un artiste, une ville, un pays, ou une date de concert</h2>
-                    <input type="text" name="search" id="search-bar" placeholder="Recherche..." value={{.Search}}>
+                    {{if .Search}}
+                        <input type="text" name="search" id="search-bar" placeholder="Recherche..." value={{.Search}}>
+                    {{else}}
+                        <input type="text" name="search" id="search-bar" placeholder="Recherche...">
+                    {{end}}
                         <button type="submit" id="search-submit">Rechercher</button>
                         {{if .Artists}}
 
