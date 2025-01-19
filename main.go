@@ -11,9 +11,18 @@ import (
 )
 
 type PageData struct {
-	TitleGroup	string
-	Artists    	[]autors.Artist
-	Long		[]int
+	TitleGroup		string
+	Artists    		[]autors.Artist
+	Long			[]int
+	Search			string
+	Categorie		bool
+	Categorie2		bool
+	Croissant 		bool
+	Before1980 		bool
+    Date1980to1990 	bool
+    Date1990to2000 	bool
+    Date2000to2010 	bool
+    After2010 		bool
 }
 
 var port = ":8080"
@@ -31,6 +40,14 @@ func main() {
 	log.Fatal(http.ListenAndServe(port, nil))
 }
 
+func FindMethod(w http.ResponseWriter, req *http.Request, met string) string {
+	if req.Method == "POST" {
+		Answer := req.FormValue(met)
+		return Answer
+	}
+	return ""
+}
+
 func ArtHandler(w http.ResponseWriter, req *http.Request) {
 	autors.Find_Locations()
 	var err error
@@ -41,17 +58,15 @@ func ArtHandler(w http.ResponseWriter, req *http.Request) {
         http.Error(w, "Erreur lors de la récupération des artistes", http.StatusInternalServerError)
         return
     }
-
+	
 	var long []int
 	for i := 1; i <= len(artists); i++ {
 		long = append(long, i)
 	}
 
-	artists = autors.Filter_By_Name(artists)
-
 	// Retrieve the start and end dates chosen by the user
-    startDateStr := req.URL.Query().Get("research-startDate")
-    endDateStr := req.URL.Query().Get("research-endDate")
+    startDateStr := FindMethod(w, req, "research-startDate")
+    endDateStr := FindMethod(w, req, "research-endDate")
 
     if startDateStr != "" && endDateStr != "" {
         startDate, err := time.Parse("2006-01-02", startDateStr)
@@ -69,30 +84,13 @@ func ArtHandler(w http.ResponseWriter, req *http.Request) {
         // Filter artists by concert dates
         artists = autors.FilterArtistsByConcertDateRange(artists, startDate, endDate)
     }
-
-	// Retrieve the selection of number of artists
-	numArtistsStr := req.URL.Query().Get("nombre")
-	numArtists, err := strconv.Atoi(numArtistsStr)
-	if err != nil || numArtists <= 0 || numArtists == 52 {
-		numArtists = len(artists) // Si pas de sélection valide, afficher tous les artistes
-		long = long[:51]
-		longbis := []int{52}
-		long = append(longbis, long...)
-	}
-	fmt.Println(numArtistsStr)
-	if numArtists < len(artists) {
-		artists = artists[:numArtists]
-		long = append(long[:numArtists-1], long[numArtists:]...)
-		longbis := []int{numArtists}
-		long = append(longbis, long...)
-	}
 	
 	// Retrieving selected creation dates
-    before1980 := req.URL.Query().Get("before-1980") != ""
-    date1980to1990 := req.URL.Query().Get("1980-1990") != ""
-    date1990to2000 := req.URL.Query().Get("1990-2000") != ""
-    date2000to2010 := req.URL.Query().Get("2000-2010") != ""
-    after2010 := req.URL.Query().Get("after 2010") != ""
+    before1980 := FindMethod(w, req, "before-1980") != ""
+    date1980to1990 := FindMethod(w, req, "1980-1990") != ""
+    date1990to2000 := FindMethod(w, req, "1990-2000") != ""
+    date2000to2010 := FindMethod(w, req, "2000-2010") != ""
+    after2010 := FindMethod(w, req, "after 2010") != ""
 
     // Applying the filters
     if (before1980 || date1980to1990 || date1990to2000 || date2000to2010 || after2010) {
@@ -100,33 +98,59 @@ func ArtHandler(w http.ResponseWriter, req *http.Request) {
     }
 
 	// Retrieve the search term
-	searchTerm := req.URL.Query().Get("search")
-
+	searchTerm := FindMethod(w, req, "search")
 	// If a search term is provided, filter artists, places and dates
 	if searchTerm != "" {
 		artists = autors.FilterArtistsBySearch(artists, searchTerm)
 	}
 
 	// Checking sorting parameters
-	categorie := req.URL.Query().Get("categorie")
+	categorie := FindMethod(w, req, "categorie")
 	if categorie == "reverseSens" {
 		artists = autors.Filter_By_Name_Reversed(artists)
 	} else {
 		artists = autors.Filter_By_Name(artists)
 	}
 
-	categorie2 := req.URL.Query().Get("categorie2")
+	categorie2 := FindMethod(w, req, "categorie2")
     if categorie2 == "reverseCreation" {
         artists = autors.Filter_By_Creation_Reversed(artists)
     } else if categorie2 == "normalCreation" {
         artists = autors.Filter_By_Creation(artists)
     }
-	
+
+	// Retrieve the selection of number of artists
+	numArtistsStr := FindMethod(w, req, "nombre")
+	//Show only the asked number of artists
+	numArtists, err := strconv.Atoi(numArtistsStr)
+	if err != nil || numArtists <= 0 || numArtists == 52 {
+		numArtists = len(artists) // Si pas de sélection valide, afficher tous les artistes
+		long = long[:51]
+		longbis := []int{52}
+		long = append(longbis, long...)
+	} else if numArtists < len(long) {
+		if numArtists < len(artists) {
+			artists = artists[:numArtists]
+		}
+		long = append(long[:numArtists-1], long[numArtists:]...)
+		longbis := []int{numArtists}
+		long = append(longbis, long...)
+	}
+
 	// Data for the template
 	pageData := PageData{
-		TitleGroup: "Groupie Trackers",
-		Artists:    artists,
-		Long:		long,
+		TitleGroup: 	"Groupie Trackers",
+		Artists:   		artists,
+		Long:			long,
+		Search:			searchTerm,
+		Categorie:		(categorie != "reverseSens"),
+		Categorie2:		(categorie2 != "reverseCreation"),
+		Croissant: 		(categorie2 == "forgetCreation"),
+		Before1980:		before1980,
+		Date1980to1990:	date1980to1990,
+		Date1990to2000:	date1990to2000,
+		Date2000to2010:	date2000to2010,
+		After2010:		after2010,
 	}
 	
 	// Load and run the HTML template
