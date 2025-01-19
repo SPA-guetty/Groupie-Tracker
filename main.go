@@ -23,6 +23,9 @@ type PageData struct {
     Date1990to2000 	bool
     Date2000to2010 	bool
     After2010 		bool
+	Actual			int
+	Previous 		bool
+	Next 			bool
 }
 
 var port = ":8080"
@@ -41,11 +44,35 @@ func main() {
 }
 
 func FindMethod(w http.ResponseWriter, req *http.Request, met string) string {
-	if req.Method == "POST" {
-		Answer := req.FormValue(met)
-		return Answer
+	if req.Method != "POST" {return ""}
+	return req.FormValue(met)
+}
+
+func GetAnAmount(tab []autors.Artist, nbprint int, idprint	int) []autors.Artist {
+	first := (nbprint*(idprint-1))
+	last := nbprint*idprint
+	if last > len(tab) {
+		last = len(tab)
 	}
-	return ""
+	tab = tab[first:last]
+	return tab
+}
+
+func NextAndPrevious(w http.ResponseWriter, req *http.Request) int {
+	if req.Method != "POST" {return 1}
+	switcher := req.FormValue("switch")
+	actualvaluestr := req.FormValue("actualvalue")
+	actualvalue, err := strconv.Atoi(actualvaluestr)
+	if err != nil {
+		fmt.Println("Error:", err)
+		return 1
+	}
+	if switcher == "<" {
+		actualvalue -= 1
+	} else if switcher == ">" {
+		actualvalue++
+	}
+	return actualvalue
 }
 
 func ArtHandler(w http.ResponseWriter, req *http.Request) {
@@ -59,6 +86,8 @@ func ArtHandler(w http.ResponseWriter, req *http.Request) {
         return
     }
 	
+	actual := NextAndPrevious(w,req)
+
 	var long []int
 	for i := 1; i <= len(artists); i++ {
 		long = append(long, i)
@@ -130,7 +159,7 @@ func ArtHandler(w http.ResponseWriter, req *http.Request) {
 		long = append(longbis, long...)
 	} else if numArtists < len(long) {
 		if numArtists < len(artists) {
-			artists = artists[:numArtists]
+			artists = GetAnAmount(artists, numArtists, actual)
 		}
 		long = append(long[:numArtists-1], long[numArtists:]...)
 		longbis := []int{numArtists}
@@ -151,8 +180,11 @@ func ArtHandler(w http.ResponseWriter, req *http.Request) {
 		Date1990to2000:	date1990to2000,
 		Date2000to2010:	date2000to2010,
 		After2010:		after2010,
+		Actual:			actual,
+		Previous: 		(actual > 1),
+		Next:			(len(long) > (numArtists*actual)),
 	}
-	
+	fmt.Println(len(long), numArtists*actual, pageData.Next)
 	// Load and run the HTML template
 	tmpl, err := template.New("home").ParseFiles("templates/home.html")
 	if err != nil {

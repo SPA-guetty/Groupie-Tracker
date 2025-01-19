@@ -114,9 +114,15 @@
                         <input id="button-artist-length" type="submit" value="Obtenir">
                     </div>
                     <div class="page-number">
-                        <input id="previous" type="submit" value="<">
-                        <label>Page ?/?</label>
-                        <input id="next" type="submit" value=">">
+                        {{if .Previous}}
+                            <input id="previous" name="switch" type="submit" value="<">
+                        {{end}}
+                        <label id="actual" name="actual">{{.Actual}}</label>
+                        {{if .Next}}
+                            <input id="next" name="switch" type="submit" value=">">
+                        {{end}}
+                        <!-- Stockage caché de la valeur actuelle -->
+                        <input id="actualvalue" name="actualvalue" type="hidden" value={{.Actual}}>
                     </div>
                 </form>
             </section>
