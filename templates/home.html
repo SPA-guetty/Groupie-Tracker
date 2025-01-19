@@ -23,7 +23,7 @@
             <section id="filter">
                 <form class="form-filterHome-alphabet" action="/" method="POST">
                     <!-- Barre de recherche -->
-                    <h2 class="search-title">Rechercher un artiste, une ville, un pays, ou une date de concert</h2>
+                    <h2 class="search-title">Rechercher un artiste, un membre de groupe, une ville, un pays, ou une date de concert</h2>
                     {{if .Search}}
                         <input type="text" name="search" id="search-bar" placeholder="Recherche..." value={{.Search}}>
                     {{else}}
@@ -111,7 +111,7 @@
                         {{end}}
                     </select>
                     <div class="submit-filter">
-                        <input id="button-artist-length" type="submit" value="Obtenir">
+                        <input id="button-artist-length" name="filters" type="submit" value="Obtenir">
                     </div>
                     <div class="page-number">
                         {{if .Previous}}
