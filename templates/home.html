@@ -1,0 +1,260 @@
+{{ define "home" }}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="static/homestyle.css"/>
+    <title>{{.TitleGroup}}</title>
+</head>
+
+<body>
+    <main class="container" >
+        <header>
+
+            <h1 id="groupTitlePage">{{.TitleGroup}}</h1>
+
+            <div class="message">
+                <p id="explication">**Choisissez votre groupe préféré ou recherchez grâce aux différents filtres**</p>
+            </div>
+
+            <div class="espace-bar"></div>
+                    
+            <section id="filter">
+                <form class="form-filterHome-alphabet" action="/" method="POST">
+                    <!-- Barre de recherche -->
+                    <h2 class="search-title">Rechercher un artiste, un membre de groupe, une ville, un pays, ou une date de concert</h2>
+                    {{if .Search}}
+                        <input type="text" name="search" id="search-bar" placeholder="Recherche..." value={{.Search}}>
+                    {{else}}
+                        <input type="text" name="search" id="search-bar" placeholder="Recherche...">
+                    {{end}}
+                        <button type="submit" id="search-submit">Rechercher</button>
+                        {{if .Artists}}
+
+                            {{range .Artists}}
+
+                            {{else}}
+                                <p>Aucun artiste trouvé pour votre recherche.</p>
+                            {{end}}
+                        {{end}}
+
+                    <h2 id="filters">Filtres</h2>
+                    <!-- Champ de sélection pour les catégories -->
+                    <fieldset id="read-section">
+                        <legend class="filter-title">Ordre Alphabétique</legend>
+                        <label for="categorie">Ordre de lecture :</label>
+                        <select id="categorie" name="categorie">
+                            {{if .Categorie}}   
+                                <option value="normalSens">A-Z</option>
+                                <option value="reverseSens">Z-A</option>      
+                            {{else}} 
+                                <option value="reverseSens">Z-A</option>
+                                <option value="normalSens">A-Z</option>
+                            {{end}}  
+                        </select><br><br>
+                    </fieldset>
+
+                    <fieldset id="concert-section">
+                        <legend class="filter-title">Filtre par Date de Concert</legend>
+                        <label for="research-startDate">Date de début :</label>
+                        <input type="date" name="research-startDate" id="research-startDate"><br>
+                        <label for="research-endDate">Date de fin :</label>
+                        <input type="date" name="research-endDate" id="research-endDate"><br>
+                        {{if .Artists}}
+                            {{range .Artists}}
+                            
+                            {{end}}
+                        {{else}}
+                            <p>Aucun artiste n'a de dates de concerts dans l'intervalle de dates choisi.</p>
+                        {{end}}
+                        <br>
+                    </fieldset>
+
+                    <fieldset id="creation-section">
+                        <legend class="filter-title">Filtres par Dates de création du groupe</legend>
+                        <label for="categorie2">Ordre de création :</label>
+                        <select id="categorie2" name="categorie2">
+                            {{if not .Croissant}}
+                                {{if .Categorie2}} 
+                                    <option value="normalCreation">Croissant🥐</option>
+                                    <option value="reverseCreation">Décroissant</option>
+                                    <option value="forgetCreation">Désactiver</option>
+                                {{else}}
+                                    <option value="reverseCreation">Décroissant</option>
+                                    <option value="normalCreation">Croissant🥐</option>
+                                    <option value="forgetCreation">Désactiver</option>
+                                {{end}}
+                            {{else}}
+                                <option value="forgetCreation">Désactivé</option>
+                                <option value="normalCreation">Croissant🥐</option>
+                                <option value="reverseCreation">Décroissant</option>
+                            {{end}}
+                        </select>
+                        <br><br>
+                        <label for="before-1980">Avant 1980 inclus</label>
+                        <input type="checkbox" name="before-1980" id="before-1980"><br>
+                        <label for="1980-1990">Entre 1980 et 1990 inclus</label>
+                        <input type="checkbox" name="1980-1990" id="date_1980-1990"><br>
+                        <label for="1990-2000">Entre 1990 et 2000 inclus</label>
+                        <input type="checkbox" name="1990-2000" id="date_1990-2000"><br>
+                        <label for="2000-2010">Entre 2000 et 2010 inclus</label>
+                        <input type="checkbox" name="2000-2010" id="date_2000-2010"><br>
+                        <label for="after 2010">Après 2010</label>
+                        <input type="checkbox" name="after 2010" id="after-2010"><br>
+                    </fieldset>
+
+                    <label for="nombre">Nombre d'artistes à afficher :</label>
+                    <select id="nombre" name="nombre">
+                        {{range .Long}}
+                            <option value="{{.}}">{{.}}</option>
+                        {{end}}
+                    </select>
+                    <div class="submit-filter">
+                        <input id="button-artist-length" name="filters" type="submit" value="Obtenir">
+                    </div>
+                    <div class="page-number">
+                        {{if .Previous}}
+                            <input id="previous" name="switch" type="submit" value="<">
+                        {{end}}
+                        <label id="actual" name="actual">{{.Actual}}</label>
+                        {{if .Next}}
+                            <input id="next" name="switch" type="submit" value=">">
+                        {{end}}
+                        <!-- Stockage caché de la valeur actuelle -->
+                        <input id="actualvalue" name="actualvalue" type="hidden" value={{.Actual}}>
+                    </div>
+                </form>
+            </section>
+        </header>
+        <nav class="card-container">
+            <div class="artist-list">
+                {{range .Artists}}
+                    <div class="card" onclick="flipAndAnimateCard(this)">
+                        <div class="card-front">
+                            <div class="image-content">
+                                <span class="overlay"></span>
+                            
+                                <div id="artist-image">
+                                    <img id="artist-img" src="{{.Image}}" alt="Image de {{.Name}}"/>
+                                </div>
+                            </div>
+
+                            <div class="card-content-front">
+                                <h2 id="artistName">{{.Name}}</h2>
+                                <p id="dateOfCreat">Année de création: {{.CreationDate}}</p>
+                            </div>
+                            <p id="firstAlbum"> -> Premier album: {{.FirstAlbum}} <- </p>
+                            <button class="flip-button" onclick="flipAndAnimateCard(this)">View more</button>
+                        </div>
+                        <div class="card-back">
+                            <div class="card-content-back">
+                                <div class="flex-artist">
+                                    <div id="artist-image-back">
+                                        <img id="artist-img-back" src="{{.Image}}" alt="Image de {{.Name}}"/>
+                                    </div>
+                                    <div class="flex-members">
+                                        <h2 id="members">Membres :</h2>
+                                        <ul class="members-list">
+                                            {{range .Members}}
+                                                <li class="album-member">{{.}}</li>
+                                            {{end}}
+                                        </ul>
+                                    </div>
+                                </div>
+                                <h2 id="concerts">Concerts :</h2>
+                                <ul class="concerts-list">
+                                    <!--Permettra d'avoir la date de concert suivi du lieu du concert sous forme (date : lieu)-->
+                                    {{range .ConcertLocations}}
+                                        <li class="artists-concerts">{{.}}</li>
+                                    {{end}}
+                                </ul>
+                            </div>
+                            <button class="return-button" onclick="flipAndAnimateInitialCard(this)">Return</button>
+                        </div>
+                    </div>
+                {{else}}
+                    <p>Aucun artiste trouvé.</p>
+                {{end}}
+            </div>
+        </nav>
+
+    </main>
+
+    <!-- Champ permettant de gérer les animations en JavaScript -->
+    <script>
+        // Variable permettant de stocker la position initiale de la carte
+        let initialPosition = { top: 0, left: 0 };
+
+        // Fonction permettant l'animation pour permettre à la card de se déplacer vers le centre, de se retourner et de s'agrandir
+        function flipAndAnimateCard(button) {
+            const cards = document.querySelectorAll('.card');
+            const currentCard = button.closest('.card');
+
+            // Calcule la position initiale de la card si elle n'est pas encore enregistrée
+            if (!initialPosition.top && !initialPosition.left) {
+                const cardRect = currentCard.getBoundingClientRect();
+                initialPosition = {
+                    top: cardRect.top + window.scrollY,
+                    left: cardRect.left + window.scrollX
+                };
+            }
+
+            // Vérification si la carte est déjà centrée ou non
+            const isCentered = currentCard.classList.contains('centered');
+
+            if (!isCentered) {
+                // Enlève la classe 'centered' de l'autre card qui est au centre
+                cards.forEach(c => {
+                    c.classList.remove('centered');
+                });
+
+                // Avoir la position initiale de la card
+                currentCard.style.top = `${cardPosition.top}px`;
+                currentCard.style.left = `${cardPosition.left}px`;
+
+                setTimeout(() => {
+                    currentCard.classList.add('centered');
+                    currentCard.style.transition = 'transform 2s ease-in-out, top 2s ease, left 2s ease';
+                    currentCard.style.transform = 'translate(-50%, -50%) scale(2) rotateY(180deg)';
+                }, 10);
+            } else {
+                // Si la carte est déjà centrée, on la remet à sa position initiale
+                currentCard.classList.remove('centered');
+                currentCard.style.transition = 'transform 2s ease-in-out, top 2s ease, left 2s ease';
+                currentCard.style.transform = 'translate(0, 0) scale(1) rotateY(0deg)';
+                currentCard.style.top = `${cardPosition.top}px`;
+                currentCard.style.left = `${cardPosition.left}px`;
+            }
+        }
+
+        function flipAndAnimateCard(card) {
+            const cards = document.querySelectorAll('.card');
+            // Enlever la classe 'centered' de l'autre carte qui est au centre            
+            cards.forEach(c => c.classList.remove('centered'));
+            card.classList.add('centered');
+        }
+
+        function flipAndAnimateInitialCard(button) {
+            const currentCard = button.closest('.card');
+    
+            currentCard.style.transition = 'transform 2s ease-in-out, opacity 2s ease-in-out';
+            currentCard.style.transform = 'rotateY(180deg) scale(0.1)';
+            currentCard.style.opacity = '1'; // Permet à la carte de disparaître du côté back et non front ce qui aurait été la valeur (0)
+            
+            // 2secondes de Timeout à la fin de l'animation avant la réinitialisation
+            setTimeout(() => {
+                currentCard.classList.remove('centered');
+                currentCard.style.transition = ''; // Suppression de la transition après l'animation terminée
+                currentCard.style.transform = ''; // Réinitialisation de la transformation
+                currentCard.style.opacity = '';
+                currentCard.style.top = '';
+                currentCard.style.left = '';
+            }, 2000);
+        }
+
+    </script>
+
+</body>
+</html>
+{{ end }}
