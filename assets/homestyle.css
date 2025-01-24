@@ -1099,7 +1099,7 @@ header {
 }
 
 .card.centered {
-   transform: translate(-50%, -50%) scale(2.6) rotateY(180deg); /* Centrer avec une échelle augmentée */
+   transform: translate(-50%, -50%) scale(2.4) rotateY(180deg); /* Centrer avec une échelle augmentée */
 }
 
 /*////////////// Mise en forme concernant la coté front \\\\\\\\\\\\\\\\*/
@@ -1527,7 +1527,7 @@ header {
 }
 
 .card.centered {
-   transform: translate(-50%, -50%) scale(2.6) rotateY(180deg); /* Centrer avec une échelle augmentée */
+   transform: translate(-50%, -50%) scale(1.9) rotateY(180deg); /* Centrer avec une échelle augmentée */
 }
 
 /*////////////// Mise en forme concernant la coté front \\\\\\\\\\\\\\\\*/
@@ -1942,7 +1942,7 @@ header {
 }
 
 .card.centered {
-   transform: translate(-50%, -50%) scale(2.6) rotateY(180deg); /* Centrer avec une échelle augmentée */
+   transform: translate(-50%, -50%) scale(1.6) rotateY(180deg); /* Centrer avec une échelle augmentée */
 }
 
 /*////////////// Mise en forme concernant la coté front \\\\\\\\\\\\\\\\*/
@@ -2357,7 +2357,7 @@ header {
 }
 
 .card.centered {
-   transform: translate(-50%, -50%) scale(2.6) rotateY(180deg); /* Centrer avec une échelle augmentée */
+   transform: translate(-50%, -50%) scale(1) rotateY(180deg); /* Centrer avec une échelle augmentée */
 }
 
 /*////////////// Mise en forme concernant la coté front \\\\\\\\\\\\\\\\*/

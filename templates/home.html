@@ -23,11 +23,11 @@
             <section id="filter">
                 <form class="form-filterHome-alphabet" action="/" method="POST">
                     <!-- Barre de recherche -->
-                    <h2 class="search-title">Rechercher un artiste, un membre de groupe, une ville, un pays, ou une date de concert</h2>
+                    <h2 class="search-title">Rechercher un artiste, une ville, un pays, ou une date de concert</h2>
                     {{if .Search}}
-                        <input type="text" name="search" id="search-bar" placeholder="Recherche..." value={{.Search}}>
+                        <input type="text" name="search" class="search-bar" placeholder="Recherche..." value={{.Search}}>
                     {{else}}
-                        <input type="text" name="search" id="search-bar" placeholder="Recherche...">
+                        <input type="text" name="search" class="search-bar" placeholder="Recherche...">
                     {{end}}
                         <button type="submit" id="search-submit">Rechercher</button>
                         {{if .Artists}}
@@ -104,14 +104,14 @@
                         <input type="checkbox" name="after 2010" id="after-2010"><br>
                     </fieldset>
 
-                    <label for="nombre">Nombre d'artistes à afficher :</label>
+                    <label id="titlenombre" for="nombre">Nombre d'artistes à afficher :</label>
                     <select id="nombre" name="nombre">
                         {{range .Long}}
                             <option value="{{.}}">{{.}}</option>
                         {{end}}
                     </select>
                     <div class="submit-filter">
-                        <input id="button-artist-length" name="filters" type="submit" value="Obtenir">
+                        <input id="button-artist-length" type="submit" value="Obtenir">
                     </div>
                     <div class="page-number">
                         {{if .Previous}}
